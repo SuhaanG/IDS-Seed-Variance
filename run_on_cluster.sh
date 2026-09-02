@@ -31,8 +31,43 @@ export CUDA_VISIBLE_DEVICES=""          # make it impossible to silently use the
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$REPO_DIR"
 LOGDIR="$REPO_DIR/logs"; mkdir -p "$LOGDIR"
+
+# Activate a virtualenv ourselves rather than trusting the caller's shell.
+# `nohup`, `sbatch` and `bash -c` subprocesses frequently lose an interactively
+# activated environment, which shows up as "ModuleNotFoundError: numpy".
+if [ -z "${VIRTUAL_ENV:-}" ] && [ "${1:-}" != "setup" ]; then
+  for CAND in "$REPO_DIR/venv" "$REPO_DIR/.venv"; do
+    if [ -f "$CAND/bin/activate" ]; then
+      # shellcheck disable=SC1091
+      source "$CAND/bin/activate"
+      echo "activated virtualenv: $CAND"
+      break
+    fi
+  done
+fi
 PY="${PY:-python}"
 stamp() { date +%Y%m%dT%H%M%S; }
+
+preflight() {
+  # Fail loudly and immediately with a useful message, rather than after a
+  # banner and a bare traceback.
+  "$PY" - <<'PYEOF' || { echo "PREFLIGHT FAILED: see above. Run 'bash run_on_cluster.sh doctor'." >&2; exit 1; }
+import sys, importlib, os
+missing = []
+for m in ["numpy", "pandas", "sklearn", "scipy", "statsmodels", "xgboost", "lightgbm"]:
+    try:
+        importlib.import_module(m)
+    except Exception:
+        missing.append(m)
+print(f"python {sys.version.split()[0]} at {sys.executable}")
+print("threads:", os.environ.get("OMP_NUM_THREADS"), "| cuda hidden:", repr(os.environ.get("CUDA_VISIBLE_DEVICES")))
+if missing:
+    print("MISSING MODULES:", ", ".join(missing), file=sys.stderr)
+    sys.exit(1)
+import lightgbm, xgboost, sklearn
+print(f"lightgbm {lightgbm.__version__} | xgboost {xgboost.__version__} | sklearn {sklearn.__version__}")
+PYEOF
+}
 
 banner() {
   echo "=============================================================="
@@ -97,6 +132,7 @@ data-unsw)
 
 reanalyses)
   banner "Pure re-analyses of the ORIGINAL 720-run outputs"
+  preflight
   echo "REQUIRES in results/: <dataset>_matrix_summary.csv and <dataset>_matrix_per_instance.csv"
   echo "from the submitted runs. Do NOT regenerate these; copy them from the machine that"
   echo "produced the paper, or the supplementary tables will not match the published ones."
@@ -111,9 +147,23 @@ reanalyses)
   $PY export_levene_bh_tables.py 2>&1 | tee "$LOGDIR/levene_$(stamp).log"
   ;;
 
+doctor)
+  banner "Environment diagnostic"
+  echo "which python: $(command -v "$PY" || echo NOT FOUND)"
+  echo "VIRTUAL_ENV: ${VIRTUAL_ENV:-<none>}"
+  echo "nproc: $(nproc)"
+  preflight
+  echo "data/:"; ls -la data/ 2>/dev/null | tail -n +2
+  echo "results/ (row counts of any matrix CSVs):"
+  for f in results/*_matrix_summary.csv results/*_matrix_per_instance.csv; do
+    [ -f "$f" ] && echo "  $(wc -l < "$f") lines  $f"
+  done
+  ;;
+
 ablation)
   DS="${2:?usage: run_on_cluster.sh ablation <dataset>}"
   banner "Ablation: $DS (16 configs x 40 seeds)"
+  preflight
   $PY run_ablation.py --dataset "$DS" --configs all --n-seeds 40 \
       2>&1 | tee "$LOGDIR/ablation_${DS}_$(stamp).log"
   $PY run_ablation.py --dataset "$DS" --analyze --n-bootstrap 1000 \
@@ -123,6 +173,7 @@ ablation)
 multisplit)
   DS="${2:?usage: run_on_cluster.sh multisplit <dataset>}"
   banner "Multi-split: $DS (official + 5 re-partitions, 40 seeds, lightgbm+xgboost)"
+  preflight
   $PY run_multisplit.py --dataset "$DS" --n-partitions 5 --n-seeds 40 \
       2>&1 | tee "$LOGDIR/multisplit_${DS}_$(stamp).log"
   $PY run_multisplit.py --dataset "$DS" --analyze --n-bootstrap 1000 \
@@ -131,6 +182,7 @@ multisplit)
 
 validate)
   banner "Bootstrap decomposition validation (no data needed)"
+  preflight
   $PY validate_bootstrap_decomposition.py --all --n-simulations 60 --n-bootstrap 300 \
       2>&1 | tee "$LOGDIR/bootstrap_validation_$(stamp).log"
   ;;
@@ -138,6 +190,7 @@ validate)
 repro)
   DS="${2:-nsl_kdd}"
   banner "LightGBM run-to-run / thread-count diagnostic: $DS"
+  preflight
   $PY check_lightgbm_reproducibility.py --dataset "$DS" \
       --configs baseline,no_subsampling,l2_reg1,baseline_deterministic_flag \
       --threads -1,1 --repeats 6 --seeds 0,1,2,3,4,5,6,7 \
