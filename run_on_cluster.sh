@@ -15,6 +15,7 @@
 #   bash run_on_cluster.sh setup                 # env + deps, once
 #   bash run_on_cluster.sh data-nslkdd           # download NSL-KDD (~22 MB)
 #   bash run_on_cluster.sh data-cic              # download + prepare CSE-CIC-IDS2018 (~6.4 GB)
+#   bash run_on_cluster.sh prep-cic              # prepare only, raw files already downloaded
 #   bash run_on_cluster.sh reanalyses            # needs the ORIGINAL matrix CSVs in results/
 #   bash run_on_cluster.sh ablation  <dataset>   # 16 configs x 40 seeds
 #   bash run_on_cluster.sh multisplit <dataset>  # 6 partitions x 40 seeds x 2 archs
@@ -135,6 +136,17 @@ data-cic)
   aws s3 cp --no-sign-request --region us-east-1 \
     "s3://cse-cic-ids2018/Processed Traffic Data for ML Algorithms/" \
     data/cicids2018_raw/ --recursive
+  $PY prepare_cicids2018.py 2>&1 | tee "$LOGDIR/prepare_cic_$(stamp).log"
+  echo "Confirm the printed row counts match config.DATASETS['cse_cic_ids2018'] (200000 / 39999)."
+  ;;
+
+prep-cic)
+  banner "CSE-CIC-IDS2018 prepare only (raw files already downloaded)"
+  acquire_lock "data_cic"
+  preflight
+  n_raw=$(ls data/cicids2018_raw/*.csv 2>/dev/null | wc -l)
+  echo "raw daily files present: $n_raw (expected 10)"
+  [ "$n_raw" -eq 10 ] || { echo "ERROR: expected 10 raw CSVs, found $n_raw. Run 'data-cic' to download." >&2; exit 1; }
   $PY prepare_cicids2018.py 2>&1 | tee "$LOGDIR/prepare_cic_$(stamp).log"
   echo "Confirm the printed row counts match config.DATASETS['cse_cic_ids2018'] (200000 / 39999)."
   ;;
