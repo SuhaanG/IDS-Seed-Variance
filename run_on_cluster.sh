@@ -76,6 +76,23 @@ banner() {
   echo "=============================================================="
 }
 
+acquire_lock() {
+  # Refuse to run two instances of the same job concurrently. The runners are
+  # idempotent across sequential restarts, but two SIMULTANEOUS processes each
+  # read the completed-cell list at startup, so both would rerun the same
+  # seeds, append duplicate summary rows, and race on the per-seed .npy files.
+  local name="$1"
+  local lockfile="$LOGDIR/.lock_${name}"
+  exec 9>"$lockfile"
+  if ! flock -n 9; then
+    echo "ERROR: another '$name' run already holds $lockfile." >&2
+    echo "       Refusing to start a second one; it would corrupt results/." >&2
+    echo "       Check with: ps -ef | grep -E 'run_ablation|run_multisplit'" >&2
+    exit 1
+  fi
+  echo "lock acquired: $lockfile (pid $$)"
+}
+
 case "${1:-help}" in
 
 setup)
@@ -112,6 +129,7 @@ data-nslkdd)
 
 data-cic)
   banner "CSE-CIC-IDS2018 download + prepare (~6.4 GB, slow)"
+  acquire_lock "data_cic"
   command -v aws >/dev/null || pip install awscli
   mkdir -p data/cicids2018_raw
   aws s3 cp --no-sign-request --region us-east-1 \
@@ -132,6 +150,7 @@ data-unsw)
 
 reanalyses)
   banner "Pure re-analyses of the ORIGINAL 720-run outputs"
+  acquire_lock "reanalyses"
   preflight
   echo "REQUIRES in results/: <dataset>_matrix_summary.csv and <dataset>_matrix_per_instance.csv"
   echo "from the submitted runs. Do NOT regenerate these; copy them from the machine that"
@@ -163,6 +182,7 @@ doctor)
 ablation)
   DS="${2:?usage: run_on_cluster.sh ablation <dataset>}"
   banner "Ablation: $DS (16 configs x 40 seeds)"
+  acquire_lock "ablation_$DS"
   preflight
   $PY run_ablation.py --dataset "$DS" --configs all --n-seeds 40 \
       2>&1 | tee "$LOGDIR/ablation_${DS}_$(stamp).log"
@@ -173,6 +193,7 @@ ablation)
 multisplit)
   DS="${2:?usage: run_on_cluster.sh multisplit <dataset>}"
   banner "Multi-split: $DS (official + 5 re-partitions, 40 seeds, lightgbm+xgboost)"
+  acquire_lock "multisplit_$DS"
   preflight
   $PY run_multisplit.py --dataset "$DS" --n-partitions 5 --n-seeds 40 \
       2>&1 | tee "$LOGDIR/multisplit_${DS}_$(stamp).log"
@@ -190,6 +211,7 @@ validate)
 repro)
   DS="${2:-nsl_kdd}"
   banner "LightGBM run-to-run / thread-count diagnostic: $DS"
+  acquire_lock "repro_$DS"
   preflight
   $PY check_lightgbm_reproducibility.py --dataset "$DS" \
       --configs baseline,no_subsampling,l2_reg1,baseline_deterministic_flag \
