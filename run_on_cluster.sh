@@ -27,7 +27,7 @@ set -euo pipefail
 export OMP_NUM_THREADS="${OMP_NUM_THREADS:-24}"
 export MKL_NUM_THREADS="$OMP_NUM_THREADS"
 export PYTHONUNBUFFERED=1
-export CUDA_VISIBLE_DEVICES=""          # make it impossible to silently use the GPU
+unset CUDA_VISIBLE_DEVICES  # was: export CUDA_VISIBLE_DEVICES="" -- xgboost 3.3.0 CUDA build raises cudaErrorNoDevice on fit when all GPUs are hidden; estimators default to device=cpu (verified), GPU stays unused
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$REPO_DIR"
@@ -227,7 +227,7 @@ repro)
   preflight
   $PY check_lightgbm_reproducibility.py --dataset "$DS" \
       --configs baseline,no_subsampling,l2_reg1,baseline_deterministic_flag \
-      --threads -1,1 --repeats 6 --seeds 0,1,2,3,4,5,6,7 \
+      --threads=-1,1 --repeats 6 --seeds 0,1,2,3,4,5,6,7 \
       2>&1 | tee "$LOGDIR/repro_${DS}_$(stamp).log"
   ;;
 

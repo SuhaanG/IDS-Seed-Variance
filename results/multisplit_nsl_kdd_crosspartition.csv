@@ -1,0 +1,3 @@
+architecture,n_partitions,mean_within_partition_seed_std,std_of_partition_means,min_partition_cv_pct,max_partition_cv_pct,min_partition_agg_snr,max_partition_agg_snr,official_partition_cv_pct
+lightgbm,6,0.04402,0.14702,1.55,22.82,321.29,2065.19,22.82
+xgboost,6,0.00055,0.08981,0.01,0.36,0.0,0.0,0.36

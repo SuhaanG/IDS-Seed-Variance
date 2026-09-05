@@ -1,0 +1,116 @@
+{
+  "0": {
+    "split_seed": null,
+    "n_train": 125973,
+    "n_test": 22544,
+    "test_counts": {
+      "normal": 9711,
+      "dos": 7458,
+      "probe": 2421,
+      "r2l": 2754,
+      "u2r": 200
+    },
+    "train_counts": {
+      "normal": 67343,
+      "dos": 45927,
+      "probe": 11656,
+      "r2l": 995,
+      "u2r": 52
+    }
+  },
+  "1": {
+    "split_seed": 880001,
+    "n_train": 125973,
+    "n_test": 22544,
+    "test_counts": {
+      "normal": 11696,
+      "dos": 8104,
+      "probe": 2137,
+      "r2l": 569,
+      "u2r": 38
+    },
+    "train_counts": {
+      "normal": 65358,
+      "dos": 45281,
+      "probe": 11940,
+      "r2l": 3180,
+      "u2r": 214
+    }
+  },
+  "2": {
+    "split_seed": 880002,
+    "n_train": 125973,
+    "n_test": 22544,
+    "test_counts": {
+      "normal": 11696,
+      "dos": 8104,
+      "probe": 2137,
+      "r2l": 569,
+      "u2r": 38
+    },
+    "train_counts": {
+      "normal": 65358,
+      "dos": 45281,
+      "probe": 11940,
+      "r2l": 3180,
+      "u2r": 214
+    }
+  },
+  "3": {
+    "split_seed": 880003,
+    "n_train": 125973,
+    "n_test": 22544,
+    "test_counts": {
+      "normal": 11696,
+      "dos": 8104,
+      "probe": 2137,
+      "r2l": 569,
+      "u2r": 38
+    },
+    "train_counts": {
+      "normal": 65358,
+      "dos": 45281,
+      "probe": 11940,
+      "r2l": 3180,
+      "u2r": 214
+    }
+  },
+  "4": {
+    "split_seed": 880004,
+    "n_train": 125973,
+    "n_test": 22544,
+    "test_counts": {
+      "normal": 11696,
+      "dos": 8104,
+      "probe": 2137,
+      "r2l": 569,
+      "u2r": 38
+    },
+    "train_counts": {
+      "normal": 65358,
+      "dos": 45281,
+      "probe": 11940,
+      "r2l": 3180,
+      "u2r": 214
+    }
+  },
+  "5": {
+    "split_seed": 880005,
+    "n_train": 125973,
+    "n_test": 22544,
+    "test_counts": {
+      "normal": 11696,
+      "dos": 8104,
+      "probe": 2137,
+      "r2l": 569,
+      "u2r": 38
+    },
+    "train_counts": {
+      "normal": 65358,
+      "dos": 45281,
+      "probe": 11940,
+      "r2l": 3180,
+      "u2r": 214
+    }
+  }
+}
