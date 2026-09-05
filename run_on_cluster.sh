@@ -21,6 +21,7 @@
 #   bash run_on_cluster.sh multisplit <dataset>  # 6 partitions x 40 seeds x 2 archs
 #   bash run_on_cluster.sh validate              # bootstrap decomposition validation
 #   bash run_on_cluster.sh repro     <dataset>   # LightGBM thread/run-to-run diagnostic
+#   bash run_on_cluster.sh logreg    <dataset>   # clean 40-seed logistic regression re-run
 #   bash run_on_cluster.sh all-datasets          # ablation + multisplit for all three, sequentially
 set -euo pipefail
 
@@ -229,6 +230,17 @@ repro)
       --configs baseline,no_subsampling,l2_reg1,baseline_deterministic_flag \
       --threads=-1,1 --repeats 6 --seeds 0,1,2,3,4,5,6,7 \
       2>&1 | tee "$LOGDIR/repro_${DS}_$(stamp).log"
+  ;;
+
+logreg)
+  DS="${2:?usage: run_on_cluster.sh logreg <dataset>}"
+  banner "Clean logistic regression re-run: $DS (40 seeds, own output files)"
+  acquire_lock "logreg_$DS"
+  preflight
+  # Writes results/<ds>_logreg_clean*.csv only. The matrix summary for the
+  # other five architectures is never touched. Aborts rather than resuming if
+  # the solver configuration differs from the one that created the file.
+  $PY rerun_logistic_regression.py --dataset "$DS" --seeds full       2>&1 | tee "$LOGDIR/logreg_${DS}_$(stamp).log"
   ;;
 
 all-datasets)
