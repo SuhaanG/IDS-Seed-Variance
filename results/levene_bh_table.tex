@@ -1,0 +1,38 @@
+% ---- nsl_kdd ----
+\begin{tabular}{llrrrrc}
+\hline
+Architecture & Category & Levene $W$ & $p$ (raw) & $p$ (BH) & Effect size (std ratio) & Sig.\\
+\hline
+dnn & normal & 3.05 & 0.0848 & 0.1413 & 1.78 & \\
+dnn & dos & 0.01 & 0.9387 & 0.9387 & 1.44 & \\
+dnn & probe & 41.97 & $<$0.0001 & $<$0.0001 & 3.75 & *\\
+dnn & r2l & 0.96 & 0.3301 & 0.4126 & 1.42 & \\
+dnn & u2r & 15.92 & 0.0001 & 0.0004 & 3.47 & *\\
+random forest & normal & 43.79 & $<$0.0001 & $<$0.0001 & 0.05 & *\\
+random forest & dos & 24.84 & $<$0.0001 & $<$0.0001 & 3.01 & *\\
+random forest & probe & 5.72 & 0.0191 & 0.0239 & 1.44 & *\\
+random forest & r2l & 32.66 & $<$0.0001 & $<$0.0001 & 2.11 & *\\
+random forest & u2r & 1.21 & 0.2750 & 0.2750 & 0.82 & \\
+xgboost & normal & 62.79 & $<$0.0001 & $<$0.0001 & 0.08 & *\\
+xgboost & dos & 1.01 & 0.3169 & 0.3169 & 1.80 & \\
+xgboost & probe & 60.79 & $<$0.0001 & $<$0.0001 & 5.51 & *\\
+xgboost & r2l & 85.00 & $<$0.0001 & $<$0.0001 & 5.24 & *\\
+xgboost & u2r & 19.03 & $<$0.0001 & $<$0.0001 & 3.17 & *\\
+lightgbm & normal & 0.05 & 0.8217 & 0.8217 & 1.48 & \\
+lightgbm & dos & 3.47 & 0.0663 & 0.0828 & 2.14 & \\
+lightgbm & probe & 19.13 & $<$0.0001 & 0.0002 & 2.79 & *\\
+lightgbm & r2l & 4.46 & 0.0378 & 0.0630 & 0.59 & \\
+lightgbm & u2r & 4.68 & 0.0335 & 0.0630 & 0.70 & \\
+logistic regression & normal & nan & nan & nan & $\infty$ & \\
+logistic regression & dos & nan & nan & nan & $\infty$ & \\
+logistic regression & probe & nan & nan & nan & $\infty$ & \\
+logistic regression & r2l & nan & nan & nan & $\infty$ & \\
+logistic regression & u2r & nan & nan & nan & $\infty$ & \\
+shallow mlp & normal & 0.81 & 0.3704 & 0.3704 & 1.71 & \\
+shallow mlp & dos & 3.89 & 0.0522 & 0.0652 & 1.35 & \\
+shallow mlp & probe & 91.10 & $<$0.0001 & $<$0.0001 & 6.33 & *\\
+shallow mlp & r2l & 6.08 & 0.0158 & 0.0264 & 2.31 & *\\
+shallow mlp & u2r & 16.58 & 0.0001 & 0.0003 & 2.80 & *\\
+\hline
+\end{tabular}
+
