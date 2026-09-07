@@ -2,6 +2,15 @@
 Figure 3: per-category signal-to-noise ratio on NSL-KDD across the convexity
 spectrum (logistic regression -> shallow MLP -> DNN).
 
+STYLE
+-----
+Matches the submitted figure and the rest of the paper's SNR figures: log
+y-axis, dashed reference line at SNR = 1, blue / purple / red series with the
+legend above the axes, lowercase category labels. Zero-valued bars cannot be
+drawn on a log axis, so they are shown as a sliver at the axis floor with a
+grey "0" above them, as in the submitted version. The only addition is the
+numeric value printed above each non-zero bar, requested by Reviewer 5.
+
 PROVENANCE OF THE PLOTTED VALUES
 --------------------------------
 The DNN and shallow-MLP values are the signal-to-noise ratios printed in
@@ -22,11 +31,6 @@ were an artifact of two solver configurations being mixed in one results file
 The asterisk marking is computed, not hard-coded: a category is starred when
 SNR increases strictly from logistic regression to the shallow MLP to the DNN.
 
-Design choices (Reviewer 5, figure legibility): grayscale-safe fills with a
-hatch on the lightest series, and the numeric value printed above every bar,
-so the figure reads correctly in black-and-white print and no bar height has
-to be estimated by eye. Zero-valued bars are labeled "0".
-
 Usage:
     python figures/build_figure3.py
 Writes figures/fig3_convexity_spectrum.pdf (for the manuscript) and a .png
@@ -41,21 +45,20 @@ import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
-# Table 1 of the manuscript, signal-to-noise ratio column entries, NSL-KDD.
-# Order of the inner tuple: (logistic regression, shallow MLP, DNN).
+# Table 1 of the manuscript, SNR entries, NSL-KDD.
+# Inner tuple order: (logistic regression, shallow MLP, DNN).
 SNR = {
-    "Normal": (0.00, 33.51, 70.09),
-    "DoS":    (0.00,  4.24, 16.79),
-    "Probe":  (0.00, 18.92, 12.17),
-    "R2L":    (0.00,  5.83,  5.15),
-    "U2R":    (0.00,  0.20,  1.68),
+    "normal": (0.00, 33.51, 70.09),
+    "dos":    (0.00,  4.24, 16.79),
+    "probe":  (0.00, 18.92, 12.17),
+    "r2l":    (0.00,  5.83,  5.15),
+    "u2r":    (0.00,  0.20,  1.68),
 }
 
-SERIES = [
-    ("Logistic regression (convex)",      "#f2f2f2", "////"),
-    ("Shallow MLP (intermediate)",        "#9a9a9a", None),
-    ("DNN (strongly non-convex)",         "#2b2b2b", None),
-]
+SERIES = [("LogReg", "#1f77b4"), ("Shallow MLP", "#7b2c8f"), ("DNN", "#c0272d")]
+
+Y_FLOOR = 0.05          # bottom of the log axis
+ZERO_STUB = Y_FLOOR * 1.12   # sliver height used to make a zero bar visible
 
 
 def monotonic_increasing(triple):
@@ -66,37 +69,40 @@ def monotonic_increasing(triple):
 def main():
     cats = list(SNR)
     x = np.arange(len(cats))
-    width = 0.26
+    width = 0.27
     starred = [monotonic_increasing(SNR[c]) for c in cats]
     tick_labels = [c + ("*" if s else "") for c, s in zip(cats, starred)]
 
     plt.rcParams.update({
-        "font.size": 7, "axes.labelsize": 7, "xtick.labelsize": 7,
-        "ytick.labelsize": 6.5, "legend.fontsize": 6, "pdf.fonttype": 42,
+        "font.size": 7.5, "axes.labelsize": 7.5, "xtick.labelsize": 7.5,
+        "ytick.labelsize": 7, "legend.fontsize": 6.5, "pdf.fonttype": 42,
     })
-    fig, ax = plt.subplots(figsize=(3.5, 2.6))
+    fig, ax = plt.subplots(figsize=(3.6, 3.4))
 
-    ymax = max(v for t in SNR.values() for v in t)
-    for i, (label, color, hatch) in enumerate(SERIES):
+    for i, (label, color) in enumerate(SERIES):
         vals = [SNR[c][i] for c in cats]
-        bars = ax.bar(x + (i - 1) * width, vals, width, label=label,
-                      color=color, edgecolor="black", linewidth=0.6,
-                      hatch=hatch)
-        for b, v in zip(bars, vals):
-            txt = "0" if v == 0 else f"{v:.2f}"
-            ax.text(b.get_x() + b.get_width() / 2, v + ymax * 0.012, txt,
-                    ha="center", va="bottom", fontsize=5.2, rotation=90)
+        heights = [v if v > 0 else ZERO_STUB for v in vals]
+        xs = x + (i - 1) * width
+        ax.bar(xs, heights, width, label=label, color=color,
+               edgecolor="black", linewidth=0.6)
+        for xi, v in zip(xs, vals):
+            if v == 0:
+                ax.text(xi, ZERO_STUB * 1.25, "0", ha="center", va="bottom",
+                        fontsize=6, color="0.45")
+            else:
+                ax.text(xi, v * 1.12, f"{v:.2f}", ha="center", va="bottom",
+                        fontsize=5, rotation=90, color="0.15")
 
+    ax.set_yscale("log")
+    ax.set_ylim(Y_FLOOR, 250)
+    ax.axhline(1.0, color="0.45", linestyle="--", linewidth=0.8, zorder=0)
     ax.set_xticks(x)
     ax.set_xticklabels(tick_labels)
-    ax.set_ylabel("Signal-to-noise ratio")
-    ax.set_ylim(0, ymax * 1.28)
+    ax.set_ylabel("Signal-to-noise ratio\n(log scale)")
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
-    ax.legend(loc="upper right", frameon=False, handlelength=1.6)
-    ax.text(0.99, 0.62, "* monotonic increase across the spectrum",
-            transform=ax.transAxes, ha="right", va="top", fontsize=5.5,
-            style="italic", color="0.25")
+    ax.legend(loc="lower center", bbox_to_anchor=(0.5, 1.01), ncol=3,
+              frameon=False, handlelength=1.4, columnspacing=1.2)
     fig.tight_layout(pad=0.4)
 
     pdf = os.path.join(HERE, "fig3_convexity_spectrum.pdf")
