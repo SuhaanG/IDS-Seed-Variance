@@ -22,6 +22,7 @@
 #   bash run_on_cluster.sh validate              # bootstrap decomposition validation
 #   bash run_on_cluster.sh repro     <dataset>   # LightGBM thread/run-to-run diagnostic
 #   bash run_on_cluster.sh logreg    <dataset>   # clean 40-seed logistic regression re-run
+#   bash run_on_cluster.sh subsample2            # R1-6: second CIC draw, 6 archs x 40 seeds + analysis
 #   bash run_on_cluster.sh all-datasets          # ablation + multisplit for all three, sequentially
 set -euo pipefail
 
@@ -241,6 +242,23 @@ logreg)
   # other five architectures is never touched. Aborts rather than resuming if
   # the solver configuration differs from the one that created the file.
   $PY rerun_logistic_regression.py --dataset "$DS" --seeds full       2>&1 | tee "$LOGDIR/logreg_${DS}_$(stamp).log"
+  ;;
+
+subsample2)
+  banner "Second independent CSE-CIC-IDS2018 subsample: 6 architectures x 40 seeds (R1-6)"
+  acquire_lock "subsample2"
+  preflight
+  for f in data/CSECICIDS2018_train_draw2.csv data/CSECICIDS2018_test_draw2.csv; do
+    [ -f "$f" ] || { echo "ERROR: $f missing. Upload the second-draw files to data/ first." >&2; exit 1; }
+  done
+  # Fastest architectures first, so the LightGBM/XGBoost contrast is available
+  # within minutes; the resumable runner picks up where it left off if the
+  # session is culled. The analysis step uses the paper's own decomposition
+  # (stats_analysis.true_variance_decomposition, 5,000 bootstrap iterations).
+  $PY run_second_subsample.py --dataset cse_cic_ids2018_draw2 --seeds full \
+      2>&1 | tee "$LOGDIR/subsample2_$(stamp).log"
+  $PY run_second_subsample.py --dataset cse_cic_ids2018_draw2 --analyze \
+      2>&1 | tee "$LOGDIR/subsample2_analyze_$(stamp).log"
   ;;
 
 all-datasets)

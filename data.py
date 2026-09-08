@@ -387,6 +387,7 @@ def _load_and_preprocess_unsw_nb15(ds_config):
 _LOADERS = {
     "nsl_kdd": _load_and_preprocess_nsl_kdd,
     "cse_cic_ids2018": _load_and_preprocess_cic_ids2018,
+    "cse_cic_ids2018_draw2": _load_and_preprocess_cic_ids2018,  # same loader, second draw
     "unsw_nb15": _load_and_preprocess_unsw_nb15,
 }
 

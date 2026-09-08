@@ -20,10 +20,19 @@ is handled elsewhere in this codebase.
 
 Usage:
     python prepare_cicids2018.py
+        (first draw, exactly as used for the submitted manuscript)
+    python prepare_cicids2018.py --rng-seed 888888 --output-suffix _draw2
+        (independent second draw for the revision, Reviewer 1 item 6; same
+         cleaning, taxonomy, target sizes and stratification, different seed)
+
+The defaults of --rng-seed and --output-suffix equal the values that were
+previously hard-coded, so running with no arguments still reproduces the
+submitted files byte-for-byte.
 """
 
 import os
 import glob
+import argparse
 import numpy as np
 import pandas as pd
 
@@ -224,7 +233,48 @@ def stratified_split_and_subsample(df, categories, target_train_rows,
     return train_df, test_df
 
 
+def _parse_args():
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--rng-seed", type=int, default=config.CIC_IDS2018_SUBSAMPLE_RNG_SEED,
+                    help="Seed for the stratified subsample draw. Default is the first "
+                         "draw's seed; use config.CIC_IDS2018_SUBSAMPLE_RNG_SEED_DRAW2 "
+                         "for the independent second draw.")
+    ap.add_argument("--output-suffix", default="",
+                    help="Inserted before .csv in both output file names, e.g. _draw2. "
+                         "Default writes the standard file names.")
+    return ap.parse_args()
+
+
+def _report_overlap_with_first_draw(train_df, test_df):
+    """How many rows of this draw also appear in the first draw (exact match on
+    every column). Two independent draws from the same pool are expected to
+    share a small fraction; this makes that fraction a reported number."""
+    if not (os.path.exists(OUTPUT_TRAIN_PATH) and os.path.exists(OUTPUT_TEST_PATH)):
+        print("\n(first-draw files not present here; overlap with the first draw not computed)")
+        return
+
+    def row_hashes(df):
+        return set(pd.util.hash_pandas_object(df.astype(str), index=False).values)
+
+    print("\nOverlap with the first draw (exact row match on all columns):")
+    for name, new_df, first_path in [("train", train_df, OUTPUT_TRAIN_PATH),
+                                     ("test", test_df, OUTPUT_TEST_PATH)]:
+        first_df = pd.read_csv(first_path, low_memory=False)
+        if set(new_df.columns) <= set(first_df.columns):
+            first_df = first_df[list(new_df.columns)]
+        shared = len(row_hashes(new_df) & row_hashes(first_df))
+        print(f"  {name}: {shared} of {len(new_df)} rows "
+              f"({100.0 * shared / len(new_df):.2f}%) also appear in the first draw")
+
+
 def main():
+    args = _parse_args()
+    out_train = OUTPUT_TRAIN_PATH.replace(".csv", f"{args.output_suffix}.csv")
+    out_test = OUTPUT_TEST_PATH.replace(".csv", f"{args.output_suffix}.csv")
+    print(f"Subsample RNG seed: {args.rng_seed} "
+          f"(first draw used {config.CIC_IDS2018_SUBSAMPLE_RNG_SEED})")
+    print(f"Outputs: {out_train}\n         {out_test}")
     os.makedirs(config.DATA_DIR, exist_ok=True)
 
     combined = load_all_raw_files()
@@ -238,7 +288,7 @@ def main():
         config.CIC_IDS2018_CATEGORIES,
         config.CIC_IDS2018_TARGET_TRAIN_ROWS,
         config.CIC_IDS2018_TARGET_TEST_ROWS,
-        config.CIC_IDS2018_SUBSAMPLE_RNG_SEED,
+        args.rng_seed,
     )
 
     print(f"\nFinal train shape: {train_df.shape}")
@@ -249,11 +299,13 @@ def main():
     print("Test category distribution:")
     print(test_df["category"].value_counts())
 
-    train_df.to_csv(OUTPUT_TRAIN_PATH, index=False)
-    test_df.to_csv(OUTPUT_TEST_PATH, index=False)
+    train_df.to_csv(out_train, index=False)
+    test_df.to_csv(out_test, index=False)
 
-    print(f"\nWrote {OUTPUT_TRAIN_PATH}")
-    print(f"Wrote {OUTPUT_TEST_PATH}")
+    print(f"\nWrote {out_train}")
+    print(f"Wrote {out_test}")
+    if args.output_suffix:
+        _report_overlap_with_first_draw(train_df, test_df)
     print(
         "\nIMPORTANT: update config.py's 'expected_train_rows' and "
         "'expected_test_rows' for cse_cic_ids2018 with the exact numbers "
