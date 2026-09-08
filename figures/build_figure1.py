@@ -22,8 +22,9 @@ Transcribed so the figure matches the tables exactly.
 Logistic regression: NSL-KDD corrected to 0.00 (clean 40-seed re-run, all
 seeds identical; the submitted 5.67 was an artifact of two solver
 configurations mixed in one results file, see Section II-I). UNSW-NB15 was
-already 0.00 in the submitted table. CSE-CIC-IDS2018 is marked below and must
-be set from the clean re-run before the final figure is produced.
+already 0.00 in the submitted table. CSE-CIC-IDS2018 corrected to 0.00 from its
+clean 40-seed re-run (all seeds identical at 0.9570989275; the submitted
+16.42 was the same artifact).
 
 Usage:
     python figures/build_figure1.py
@@ -44,7 +45,7 @@ COLORS = ["#1f5fa8", "#74add1", "#2e7d32", "#b2182b", "#e8735a", "#7b2c8f"]
 # Aggregate-accuracy SNR, Tables 6-8, order as ARCHS.
 SNR = {
     "NSL-KDD":         [9.30,  2.89, 0.20, 1323.53,  0.00, 7.63],
-    "CSE-CIC-IDS2018": [0.00,  0.00, 0.00, 1747.10, 16.42, 0.00],   # LR: PENDING clean re-run
+    "CSE-CIC-IDS2018": [0.00,  0.00, 0.00, 1747.10,  0.00, 0.00],
     "UNSW-NB15":       [29.53, 0.00, 0.00,  378.69,  0.00, 17.45],
 }
 
@@ -83,10 +84,8 @@ def main():
     png = os.path.join(HERE, "fig1_aggregate_snr.png")
     fig.savefig(pdf)
     fig.savefig(png, dpi=200)
-    pending = [ds for ds, v in SNR.items() if ds == "CSE-CIC-IDS2018"]
     print("wrote", pdf)
     print("wrote", png)
-    print("NOTE: CSE-CIC-IDS2018 logistic regression value still PENDING the clean re-run.")
 
 
 if __name__ == "__main__":
