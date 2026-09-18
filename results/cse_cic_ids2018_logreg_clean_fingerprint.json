@@ -1,0 +1,11 @@
+{
+  "architecture": "logistic_regression",
+  "logreg_C": 1.0,
+  "logreg_max_iter": 1000,
+  "logreg_solver": "saga",
+  "numpy": "2.5.1",
+  "python": "3.13.14",
+  "results_schema_version": "1.0",
+  "scipy": "1.18.0",
+  "sklearn": "1.9.0"
+}
