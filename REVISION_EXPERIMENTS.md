@@ -87,3 +87,33 @@ finding is not partition-specific. `std_of_partition_means` versus
 to seed variance, which is the number Review_Report item 1 asks for. Remember
 the NSL-KDD caveat: re-partitions remove the official distribution shift, so
 only within-partition instability is comparable, not absolute accuracy.
+
+## Manuscript table or figure -> command -> result file (revised manuscript, September 2026)
+
+Section, table and figure numbers refer to the revised manuscript. Every command is
+run from the repository root with the project virtual environment active; on the
+NCSA JupyterHub node use the `run_on_cluster.sh` subcommands, which pin thread
+count, activate the venv and hold a lock against concurrent runs.
+
+| Manuscript item | Command | Result file(s) |
+|---|---|---|
+| Table 1 (hyperparameters) | none; every value is in `config.py` | - |
+| Table 2 (estimator validation) | `python validate_bootstrap_decomposition.py --all` (`bash run_on_cluster.sh validate`) | `results/bootstrap_validation_small_variance.csv` |
+| Table 3 (ablation) | `bash run_on_cluster.sh ablation nsl_kdd` | `results/ablation_nsl_kdd_analysis.csv`, `_summary.csv`, `_determinism.json` |
+| Table 4 (repeated-run reproducibility) | `bash run_on_cluster.sh repro nsl_kdd` | `results/lgb_reproducibility_nsl_kdd.csv`, `_summary.csv` |
+| Table 5 and Sec. III-D (random-subset seed adequacy) | `python analyze_seed_adequacy_random_subsets.py --dataset nsl_kdd` | `results/seed_adequacy_random_nsl_kdd.csv`, `seed_adequacy_rule_nsl_kdd.csv`, `.tex` |
+| Tables 6 to 8 (main decomposition) | original pipeline: `python run_matrix.py --seeds full`, then `stats_analysis.run_full_analysis` per dataset and architecture | `results/<dataset>_matrix_summary.csv`, `<dataset>_matrix_per_instance.csv` |
+| Tables 6 and 7, logistic regression columns | `bash run_on_cluster.sh logreg nsl_kdd` and `... logreg cse_cic_ids2018` (clean single-configuration re-run; see `rerun_logistic_regression.py`) | `results/<dataset>_logreg_clean.csv`, `_fingerprint.json` |
+| Table 9 and Sec. III-F (Levene / BH) | `python export_levene_bh_tables.py` | `results/levene_bh_all.csv`, `levene_bh_table.tex` |
+| Table 10 and Sec. III-I (second CSE-CIC-IDS2018 draw) | `python prepare_cicids2018.py --rng-seed 888888 --output-suffix _draw2` (needs ~35 GB RAM; run on a workstation, not the 32 GB cluster container), then `bash run_on_cluster.sh subsample2` | `data/CSECICIDS2018_*_draw2.csv` (sha256 in `config.py`), `results/cse_cic_ids2018_draw2_matrix_summary.csv`, `_decomposition.csv` |
+| Table 11 and Sec. III-J (overlap split) | `python analyze_overlap_split.py --dataset nsl_kdd` | `results/overlap_split_nsl_kdd_analysis.csv` |
+| Table 12 (data quality) | none; counts come from the loaders' audit output in `data.py` | - |
+| Sec. III-H (multi-partition check) | `bash run_on_cluster.sh multisplit nsl_kdd` | `results/multisplit_nsl_kdd_analysis.csv`, `_crosspartition.csv`, `_partitions.json` |
+| Fig. 1 | `python figures/build_figure1.py` | `figures/fig1_aggregate_snr.pdf` |
+| Fig. 2 (raw per-seed accuracy) | per-seed `aggregate_accuracy` from `results/<dataset>_matrix_summary.csv`; the original plotting script for this figure is not retained in the repository | - |
+| Fig. 3 | `python figures/build_figure3.py` | `figures/fig3_convexity_spectrum.pdf` |
+
+Seeds: `config.PILOT_SEEDS` (0 to 9) and `config.FULL_SEEDS` (0 to 39); bootstrap
+seed `config.BOOTSTRAP_RNG_SEED`; subsample seeds `config.CIC_IDS2018_SUBSAMPLE_RNG_SEED`
+and `..._DRAW2`; re-partition seed `MULTISPLIT_RNG_SEED` in `run_multisplit.py`;
+random-subset seed `RANDOM_SUBSET_RNG_SEED` in `analyze_seed_adequacy_random_subsets.py`.
