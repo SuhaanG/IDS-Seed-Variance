@@ -194,3 +194,17 @@ compare_architectures(summary_df, per_instance_df, "r2l", "nsl_kdd",
    actually present in the real CSE-CIC-IDS2018 files, `prepare_cicids2018.py`
    will refuse to proceed if it doesn't, but double-check the mapping
    makes semantic sense, not just that it's complete.
+
+## Revision materials (IEEE Access resubmission, September 2026)
+
+Everything added for the revised manuscript is documented in
+[REVISION_EXPERIMENTS.md](REVISION_EXPERIMENTS.md), whose final section maps every
+table and figure of the revised paper to the command that produces it and the file
+it writes. Entry points: `run_on_cluster.sh` (runs every revision experiment with a
+pinned thread count), `run_ablation.py`, `run_multisplit.py`,
+`run_second_subsample.py`, `rerun_logistic_regression.py`,
+`check_lightgbm_reproducibility.py`, `analyze_overlap_split.py`,
+`analyze_seed_adequacy_random_subsets.py`, `export_levene_bh_tables.py`, and
+`figures/build_figure1.py` / `figures/build_figure3.py`. The independent second
+CSE-CIC-IDS2018 subsample is in `data/` in gzipped form, with its SHA-256 checksums
+recorded in `config.py`; the result files behind every new table are in `results/`.
