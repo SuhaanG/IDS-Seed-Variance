@@ -20,8 +20,8 @@ Read from the result files, so the figure always matches the tables:
     five non-LightGBM architectures, run set C deterministic LightGBM; paper's
     estimator, 5,000 bootstrap iterations).
   CSE-CIC-IDS2018 and UNSW-NB15: LightGBM from results/<ds>_corrected_decomposition_lgbdet.csv
-    (deterministic, run set C); logistic regression from the clean re-runs
-    (all 40 seeds identical, so SNR is exactly 0); DNN, random forest, XGBoost
+    (deterministic, run set C); logistic regression from the same decomposition file
+    (clean re-runs; SNR 0 on both); DNN, random forest, XGBoost
     and shallow MLP from Tables 7 and 8 (original run set A, whose per-seed
     files were not retained), transcribed below.
 
@@ -62,10 +62,9 @@ def load_snr():
     for ds, key in (("CSE-CIC-IDS2018", "cse_cic_ids2018"), ("UNSW-NB15", "unsw_nb15")):
         dnn, rf, xgb, mlp = SET_A[ds]
         lgb = agg_snr(f"{key}_corrected_decomposition_lgbdet.csv", "lightgbm_deterministic")
-        lr = pd.read_csv(os.path.join(RES, f"{key}_logreg_clean.csv"))
-        if len(lr) != 40 or lr["aggregate_accuracy"].nunique() != 1:
-            raise SystemExit(f"{key}: logistic regression clean run is not 40 identical seeds")
-        out[ds] = [dnn, rf, xgb, lgb, 0.0, mlp]
+        lr = agg_snr(f"{key}_corrected_decomposition_lgbdet.csv", "logistic_regression")
+        xgb = agg_snr(f"{key}_decomposition.csv", "xgboost")  # run set C XGBoost
+        out[ds] = [dnn, rf, xgb, lgb, lr, mlp]
     return out
 
 
