@@ -1,0 +1,25 @@
+{
+  "architecture": "lightgbm_deterministic",
+  "dataset": "cse_cic_ids2018_draw2",
+  "lightgbm": "4.6.0",
+  "lightgbm_params": {
+    "colsample_bytree": 0.8,
+    "deterministic": true,
+    "force_row_wise": true,
+    "learning_rate": 0.1,
+    "max_depth": 6,
+    "n_estimators": 200,
+    "n_jobs": -1,
+    "num_class": 7,
+    "objective": "multiclass",
+    "subsample": 0.8,
+    "verbosity": -1
+  },
+  "numpy": "2.5.1",
+  "omp_num_threads": "24",
+  "pandas": "3.0.3",
+  "python": "3.13.16",
+  "results_schema_version": "1.0",
+  "scipy": "1.18.0",
+  "sklearn": "1.9.0"
+}

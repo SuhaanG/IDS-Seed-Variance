@@ -1,0 +1,31 @@
+arch,cat,raw_sd_ratio,p_bh,levene_sig,genuine_sd_ratio,cat_snr,cat_snr_gt1
+dnn,normal,1.78,0.14133240426011193,False,1.85,71.33553769539627,True
+dnn,dos,1.44,0.9386827037927493,False,1.43,8.705677671724931,True
+dnn,probe,3.75,3.800150021973709e-08,True,3.78,12.232899836188576,True
+dnn,r2l,1.42,0.412592538971858,False,1.35,4.804721301318375,True
+dnn,u2r,3.47,0.00037009258639233587,True,2.89,1.7094360748521285,True
+random_forest,normal,0.05,2.0884550213729872e-08,True,0.0,0.0,False
+random_forest,dos,3.01,6.12910983756835e-06,True,3.35,11.821349122137011,True
+random_forest,probe,1.44,0.02391634482872602,True,0.0,0.0,False
+random_forest,r2l,2.11,4.809253333753737e-07,True,2.33,9.934641039589431,True
+random_forest,u2r,0.82,0.27500159810790115,False,0.0,0.0,False
+xgboost,normal,0.08,3.299028428368942e-11,True,both 0,0.0,False
+xgboost,dos,1.8,0.3168866058516046,False,inf,0.3703063500415391,False
+xgboost,probe,5.51,3.883414344880715e-11,True,inf,1.478442468758184,True
+xgboost,r2l,5.24,2.0253166386523206e-13,True,inf,7.225152740584909,True
+xgboost,u2r,3.17,4.8720818793982e-05,True,both 0,0.0,False
+lightgbm_deterministic,normal,1.65,0.6406418441074871,False,1.65,4731.983752463309,True
+lightgbm_deterministic,dos,1.74,0.1380937583173185,False,1.74,1731.953718390217,True
+lightgbm_deterministic,probe,1.83,0.008706830327278058,True,1.83,541.1306992894783,True
+lightgbm_deterministic,r2l,0.38,0.07709014097827027,False,0.38,140.9173554013888,True
+lightgbm_deterministic,u2r,0.67,0.13787495624181548,False,0.67,39.1195935999767,True
+logistic_regression,normal,inf,,False,both 0,0.0,False
+logistic_regression,dos,inf,,False,both 0,0.0,False
+logistic_regression,probe,inf,,False,both 0,0.0,False
+logistic_regression,r2l,inf,,False,both 0,0.0,False
+logistic_regression,u2r,inf,,False,both 0,0.0,False
+shallow_mlp,normal,1.71,0.37042640084386075,False,1.86,19.876091417015527,True
+shallow_mlp,dos,1.35,0.06523839886044464,False,1.31,3.2438224037127696,True
+shallow_mlp,probe,6.33,4.7607682912811804e-14,True,6.85,16.7000749083566,True
+shallow_mlp,r2l,2.31,0.02639608866294679,True,2.4,6.685141049314661,True
+shallow_mlp,u2r,2.8,0.00027731131027001495,True,0.0,0.0,False

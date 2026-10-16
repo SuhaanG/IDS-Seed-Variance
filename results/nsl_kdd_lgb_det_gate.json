@@ -1,0 +1,14 @@
+{
+  "seed": 0,
+  "fits": 2,
+  "proba_hashes": [
+    "38cc04e969cda709",
+    "38cc04e969cda709"
+  ],
+  "bit_identical": true,
+  "fit_seconds": [
+    2.01,
+    1.92
+  ],
+  "omp_num_threads": "24"
+}
