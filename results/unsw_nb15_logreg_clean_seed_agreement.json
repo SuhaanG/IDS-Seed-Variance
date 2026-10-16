@@ -1,0 +1,9 @@
+{
+ "dataset": "unsw_nb15",
+ "n_seeds": 40,
+ "n_test": 82332,
+ "max_differing_predictions_any_two_seeds": 2,
+ "pairs_identical": 505,
+ "pairs_total": 780,
+ "instances_ever_differing": 2
+}

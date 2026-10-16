@@ -1,0 +1,8 @@
+nsl_kdd          seed 0 default   train acc 0.6385  test acc 0.5164  max|raw| 1.65e+06
+nsl_kdd          seed 0 lambda=1  train acc 0.9999  test acc 0.7620  max|raw| 13.3
+cse_cic_ids2018  seed 0 default   train acc 0.5862  test acc 0.5853  max|raw| 5.1e+06
+cse_cic_ids2018  seed 0 lambda=1  train acc 0.9870  test acc 0.9848  max|raw| 14.5
+unsw_nb15        seed 0 default   train acc 0.8016  test acc 0.7161  max|raw| 5.96e+05
+unsw_nb15        seed 0 lambda=1  train acc 0.8586  test acc 0.7690  max|raw| 16.6
+cse_cic_ids2018_draw2 seed 0 default   train acc 0.9877  test acc 0.9854  max|raw| 3.94e+03
+cse_cic_ids2018_draw2 seed 0 lambda=1  train acc 0.9871  test acc 0.9858  max|raw| 14.1
