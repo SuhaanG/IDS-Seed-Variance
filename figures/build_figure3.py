@@ -11,22 +11,13 @@ drawn on a log axis, so they are shown as a sliver at the axis floor with a
 grey "0" above them, as in the submitted version. The only addition is the
 numeric value printed above each non-zero bar, requested by Reviewer 5.
 
-PROVENANCE OF THE PLOTTED VALUES
---------------------------------
-The DNN and shallow-MLP values are the signal-to-noise ratios printed in
-Table 1 of the manuscript (tab:nsl_kdd_results), which come from the original
-240-run NSL-KDD matrix and the bootstrap decomposition of Section II-F with
-5,000 iterations. They are transcribed here rather than recomputed so that the
-figure matches the table exactly.
-
-Logistic regression is 0.00 in every category. The clean 40-seed re-run
-(rerun_logistic_regression.py; results/nsl_kdd_matrix_summary.csv) returns
-identical aggregate accuracy and identical per-category recall for all 40
-seeds, so the observed between-seed variance is exactly zero, the genuine
-variance estimate max(0, 0 - noise) is exactly zero, and the ratio is 0.00.
-The values 7.49 / 4.77 / 14.46 that an earlier draft reported for this column
-were an artifact of two solver configurations being mixed in one results file
-(see Section II-I of the manuscript) and are not used.
+PROVENANCE OF THE PLOTTED VALUES (round-3 revision)
+----------------------------------------------------
+Read from results/nsl_kdd_corrected_decomposition_lgbdet.csv: the September
+2026 NSL-KDD matrix (run set B), decomposed with the paper's estimator at
+5,000 bootstrap iterations, the same values as Table 6. Logistic regression is
+0 in every category (all 40 seeds identical). Labels use three significant
+figures (Reviewer 1, round 2, item 9).
 
 The asterisk marking is computed, not hard-coded: a category is starred when
 SNR increases strictly from logistic regression to the shallow MLP to the DNN.
@@ -45,15 +36,26 @@ import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
-# Table 1 of the manuscript, SNR entries, NSL-KDD.
+import pandas as pd
+_DEC = pd.read_csv(os.path.join(HERE, "..", "results", "nsl_kdd_corrected_decomposition_lgbdet.csv"))
+
+
+def _snr(arch, cell):
+    r = _DEC[(_DEC["architecture"] == arch) & (_DEC["cell"] == cell)]
+    if len(r) != 1:
+        raise SystemExit(f"missing {arch}/{cell}")
+    return float(r["snr"].iloc[0])
+
+
 # Inner tuple order: (logistic regression, shallow MLP, DNN).
-SNR = {
-    "normal": (0.00, 33.51, 70.09),
-    "dos":    (0.00,  4.24, 16.79),
-    "probe":  (0.00, 18.92, 12.17),
-    "r2l":    (0.00,  5.83,  5.15),
-    "u2r":    (0.00,  0.20,  1.68),
-}
+SNR = {c: tuple(_snr(a, c) for a in ("logistic_regression", "shallow_mlp", "dnn"))
+       for c in ("normal", "dos", "probe", "r2l", "u2r")}
+
+
+def sig3(v):
+    """Three significant figures, no scientific notation."""
+    return f"{float(f'{v:.3g}'):g}"
+
 
 SERIES = [("LogReg", "#1f77b4"), ("Shallow MLP", "#7b2c8f"), ("DNN", "#c0272d")]
 
@@ -90,7 +92,7 @@ def main():
                 ax.text(xi, ZERO_STUB * 1.25, "0", ha="center", va="bottom",
                         fontsize=6, color="0.45")
             else:
-                ax.text(xi, v * 1.12, f"{v:.2f}", ha="center", va="bottom",
+                ax.text(xi, v * 1.12, sig3(v), ha="center", va="bottom",
                         fontsize=5, rotation=90, color="0.15")
 
     ax.set_yscale("log")

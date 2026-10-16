@@ -13,18 +13,17 @@ that cannot be drawn on a log axis. This version therefore labels them "0",
 the same convention as Figure 3 and the same meaning as 0.000000 (0.00) in
 the tables.
 
-PROVENANCE OF THE PLOTTED VALUES
---------------------------------
-Aggregate-accuracy SNR entries of Tables 6, 7 and 8 of the manuscript, from
-the original 720-run matrix and the bootstrap decomposition of Section II-F.
-Transcribed so the figure matches the tables exactly.
-
-Logistic regression: NSL-KDD corrected to 0.00 (clean 40-seed re-run, all
-seeds identical; the submitted 5.67 was an artifact of two solver
-configurations mixed in one results file, see Section II-I). UNSW-NB15 was
-already 0.00 in the submitted table. CSE-CIC-IDS2018 corrected to 0.00 from its
-clean 40-seed re-run (all seeds identical at 0.9570989275; the submitted
-16.42 was the same artifact).
+PROVENANCE OF THE PLOTTED VALUES (round-3 revision)
+----------------------------------------------------
+Read from the result files, so the figure always matches the tables:
+  NSL-KDD: results/nsl_kdd_corrected_decomposition_lgbdet.csv (run set B for the
+    five non-LightGBM architectures, run set C deterministic LightGBM; paper's
+    estimator, 5,000 bootstrap iterations).
+  CSE-CIC-IDS2018 and UNSW-NB15: LightGBM from results/<ds>_corrected_decomposition_lgbdet.csv
+    (deterministic, run set C); logistic regression from the clean re-runs
+    (all 40 seeds identical, so SNR is exactly 0); DNN, random forest, XGBoost
+    and shallow MLP from Tables 7 and 8 (original run set A, whose per-seed
+    files were not retained), transcribed below.
 
 Usage:
     python figures/build_figure1.py
@@ -42,12 +41,33 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ARCHS = ["DNN", "Random\nForest", "XGBoost", "LightGBM", "Logistic\nRegression", "Shallow\nMLP"]
 COLORS = ["#1f5fa8", "#74add1", "#2e7d32", "#b2182b", "#e8735a", "#7b2c8f"]
 
-# Aggregate-accuracy SNR, Tables 6-8, order as ARCHS.
-SNR = {
-    "NSL-KDD":         [9.30,  2.89, 0.20, 1323.53,  0.00, 7.63],
-    "CSE-CIC-IDS2018": [0.00,  0.00, 0.00, 1747.10,  0.00, 0.00],
-    "UNSW-NB15":       [29.53, 0.00, 0.00,  378.69,  0.00, 17.45],
-}
+# Run set A values (Tables 7 and 8), order DNN, RF, XGBoost, shallow MLP.
+SET_A = {"CSE-CIC-IDS2018": [0.00, 0.00, 0.00, 0.00], "UNSW-NB15": [29.53, 0.00, 0.00, 17.45]}
+RES = os.path.join(HERE, "..", "results")
+import pandas as pd
+
+
+def agg_snr(csv, arch):
+    d = pd.read_csv(os.path.join(RES, csv))
+    r = d[(d["architecture"] == arch) & (d["cell"] == "aggregate_accuracy")]
+    if len(r) != 1:
+        raise SystemExit(f"{csv}: no aggregate row for {arch}")
+    return float(r["snr"].iloc[0])
+
+
+def load_snr():
+    nsl = "nsl_kdd_corrected_decomposition_lgbdet.csv"
+    out = {"NSL-KDD": [agg_snr(nsl, a) for a in
+                       ("dnn", "random_forest", "xgboost", "lightgbm_deterministic", "logistic_regression", "shallow_mlp")]}
+    for ds, key in (("CSE-CIC-IDS2018", "cse_cic_ids2018"), ("UNSW-NB15", "unsw_nb15")):
+        dnn, rf, xgb, mlp = SET_A[ds]
+        lgb = agg_snr(f"{key}_corrected_decomposition_lgbdet.csv", "lightgbm_deterministic")
+        lr = pd.read_csv(os.path.join(RES, f"{key}_logreg_clean.csv"))
+        if len(lr) != 40 or lr["aggregate_accuracy"].nunique() != 1:
+            raise SystemExit(f"{key}: logistic regression clean run is not 40 identical seeds")
+        out[ds] = [dnn, rf, xgb, lgb, 0.0, mlp]
+    return out
+
 
 Y_FLOOR = 0.05
 ZERO_STUB = Y_FLOOR * 1.12
@@ -60,6 +80,9 @@ def main():
     })
     fig, axes = plt.subplots(1, 3, figsize=(7.3, 2.7), sharey=True)
     x = np.arange(len(ARCHS))
+    SNR = load_snr()
+    for ds, vals in SNR.items():
+        print(ds, [round(v, 3) for v in vals])
     for ax, (ds, vals) in zip(axes, SNR.items()):
         heights = [v if v > 0 else ZERO_STUB for v in vals]
         ax.bar(x, heights, 0.66, color=COLORS, edgecolor="black", linewidth=0.5)
