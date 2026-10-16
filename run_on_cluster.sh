@@ -22,6 +22,7 @@
 #   bash run_on_cluster.sh validate              # bootstrap decomposition validation
 #   bash run_on_cluster.sh repro     <dataset>   # LightGBM thread/run-to-run diagnostic
 #   bash run_on_cluster.sh logreg    <dataset>   # clean 40-seed logistic regression re-run
+#   bash run_on_cluster.sh lgbdet    <dataset>   # deterministic 40-seed LightGBM + diagnostics + corrected table
 #   bash run_on_cluster.sh subsample2            # R1-6: second CIC draw, 6 archs x 40 seeds + analysis
 #   bash run_on_cluster.sh all-datasets          # ablation + multisplit for all three, sequentially
 set -euo pipefail
@@ -242,6 +243,22 @@ logreg)
   # other five architectures is never touched. Aborts rather than resuming if
   # the solver configuration differs from the one that created the file.
   $PY rerun_logistic_regression.py --dataset "$DS" --seeds full       2>&1 | tee "$LOGDIR/logreg_${DS}_$(stamp).log"
+  ;;
+
+lgbdet)
+  DS="${2:?usage: run_on_cluster.sh lgbdet <dataset>}"
+  banner "Deterministic LightGBM re-run: $DS (40 seeds, deterministic=True, own output files)"
+  acquire_lock "lgbdet_$DS"
+  preflight
+  # Writes results/<ds>_lgb_det*.{csv,json} only. Fits seed 0 twice and aborts
+  # unless the predictions are bit-identical; aborts rather than resuming if the
+  # configuration, library versions or OMP_NUM_THREADS differ from the ones
+  # recorded when the files were created. The analysis step rebuilds the
+  # decomposition table with the paper's estimator at 5,000 bootstrap iterations.
+  $PY rerun_lightgbm_deterministic.py --dataset "$DS" --seeds full \
+      2>&1 | tee "$LOGDIR/lgbdet_${DS}_$(stamp).log"
+  $PY rerun_lightgbm_deterministic.py --dataset "$DS" --analyze --n-bootstrap 5000 \
+      2>&1 | tee "$LOGDIR/lgbdet_${DS}_analyze_$(stamp).log"
   ;;
 
 subsample2)

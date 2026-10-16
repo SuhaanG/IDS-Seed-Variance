@@ -20,6 +20,10 @@ absent; if the two subsets agree, overlap is not driving the result.
 Usage (on the machine that has the data and the per-instance CSVs):
     python analyze_overlap_split.py --dataset nsl_kdd
     python analyze_overlap_split.py --dataset unsw_nb15 --architectures lightgbm,xgboost
+    python analyze_overlap_split.py --dataset nsl_kdd --n-bootstrap 5000 --tag _matrix_5000
+
+--tag is appended to the output file name, so a rerun with different
+settings or a different per-instance file does not overwrite an earlier one.
 """
 
 import os
@@ -63,6 +67,7 @@ def main():
     ap.add_argument("--per-instance-csv", default=None)
     ap.add_argument("--architectures", default=",".join(config.ARCHITECTURES))
     ap.add_argument("--n-bootstrap", type=int, default=DEFAULT_REVISION_BOOTSTRAP)
+    ap.add_argument("--tag", default="", help="Suffix for the output file, e.g. _matrix_5000.")
     args = ap.parse_args()
 
     dataset = args.dataset
@@ -117,7 +122,7 @@ def main():
                   f"CV={row['cv_pct']}% SNR(agg)={row['agg_snr']}")
 
     df = pd.DataFrame(rows)
-    out_csv = os.path.join(config.RESULTS_DIR, f"overlap_split_{dataset}_analysis.csv")
+    out_csv = os.path.join(config.RESULTS_DIR, f"overlap_split_{dataset}_analysis{args.tag}.csv")
     df.to_csv(out_csv, index=False)
 
     print("\n=== Aggregate accuracy: overlap vs non-overlap ===")
