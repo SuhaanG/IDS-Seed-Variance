@@ -1,0 +1,73 @@
+/home/suhaank2/Scientific-Reports/venv/lib/python3.13/site-packages/torch/cuda/__init__.py:188: UserWarning: CUDA initialization: The NVIDIA driver on your system is too old (found version 12080). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver. (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Architectures present: ['xgboost', 'random_forest', 'shallow_mlp', 'dnn']
+Bootstrap iterations: 5000  RNG seed: 999999
+  xgboost              aggregate_accuracy   0.000000 (0.00)
+  xgboost              normal               0.000000 (0.00)
+  xgboost              generic              0.000000 (0.00)
+  xgboost              exploits             0.000012 (1.20)
+  xgboost              fuzzers              0.000028 (0.69)
+  xgboost              dos                  0.000026 (1.24)
+  xgboost              reconnaissance       0.000000 (0.00)
+  xgboost              analysis             0.000608 (8.85)
+  xgboost              backdoor             0.000721 (4.81)
+  xgboost              shellcode            0.000000 (0.00)
+  xgboost              worms                0.000000 (0.00)
+  random_forest        aggregate_accuracy   0.000000 (0.00)
+  random_forest        normal               0.000000 (0.00)
+  random_forest        generic              0.000000 (0.00)
+  random_forest        exploits             0.000004 (0.27)
+  random_forest        fuzzers              0.000053 (1.32)
+  random_forest        dos                  0.000000 (0.00)
+  random_forest        reconnaissance       0.000000 (0.00)
+  random_forest        analysis             0.000017 (1.24)
+  random_forest        backdoor             0.000000 (0.00)
+  random_forest        shellcode            0.000000 (0.00)
+  random_forest        worms                0.000000 (0.00)
+  shallow_mlp          aggregate_accuracy   0.000056 (24.30)
+  shallow_mlp          normal               0.000338 (61.42)
+  shallow_mlp          generic              0.000000 (0.00)
+  shallow_mlp          exploits             0.000249 (33.06)
+  shallow_mlp          fuzzers              0.002091 (52.31)
+  shallow_mlp          dos                  0.001249 (126.74)
+  shallow_mlp          reconnaissance       0.000155 (3.46)
+  shallow_mlp          analysis             0.000001 (1.61)
+  shallow_mlp          backdoor             0.000002 (0.31)
+  shallow_mlp          shellcode            0.003102 (4.85)
+  shallow_mlp          worms                0.000000 (0.00)
+  dnn                  aggregate_accuracy   0.000051 (23.80)
+  dnn                  normal               0.000455 (94.11)
+  dnn                  generic              0.000000 (0.00)
+  dnn                  exploits             0.000068 (11.88)
+  dnn                  fuzzers              0.001964 (48.50)
+  dnn                  dos                  0.000132 (16.11)
+  dnn                  reconnaissance       0.000363 (7.90)
+  dnn                  analysis             Degen.
+  dnn                  backdoor             0.000003 (1.36)
+  dnn                  shellcode            0.001870 (2.94)
+  dnn                  worms                0.001361 (2.64)
+
+=== unsw_nb15: genuine between-seed variance (SNR), layout of Table 7 ===
+| cell | xgboost | random_forest | shallow_mlp | dnn |
+|---|---|---|---|---|
+| aggregate_accuracy | 0.000000 (0.00) | 0.000000 (0.00) | 0.000056 (24.30) | 0.000051 (23.80) |
+| normal | 0.000000 (0.00) | 0.000000 (0.00) | 0.000338 (61.42) | 0.000455 (94.11) |
+| generic | 0.000000 (0.00) | 0.000000 (0.00) | 0.000000 (0.00) | 0.000000 (0.00) |
+| exploits | 0.000012 (1.20) | 0.000004 (0.27) | 0.000249 (33.06) | 0.000068 (11.88) |
+| fuzzers | 0.000028 (0.69) | 0.000053 (1.32) | 0.002091 (52.31) | 0.001964 (48.50) |
+| dos | 0.000026 (1.24) | 0.000000 (0.00) | 0.001249 (126.74) | 0.000132 (16.11) |
+| reconnaissance | 0.000000 (0.00) | 0.000000 (0.00) | 0.000155 (3.46) | 0.000363 (7.90) |
+| analysis | 0.000608 (8.85) | 0.000017 (1.24) | 0.000001 (1.61) | Degen. |
+| backdoor | 0.000721 (4.81) | 0.000000 (0.00) | 0.000002 (0.31) | 0.000003 (1.36) |
+| shellcode | 0.000000 (0.00) | 0.000000 (0.00) | 0.003102 (4.85) | 0.001870 (2.94) |
+| worms | 0.000000 (0.00) | 0.000000 (0.00) | 0.000000 (0.00) | 0.001361 (2.64) |
+
+=== aggregate accuracy: mean, CV %, SNR ===
+| architecture | mean | cv_pct | snr |
+|---|---|---|---|
+| xgboost | 0.771017 | 0.117308 | 0 |
+| random_forest | 0.755418 | 0.0706176 | 0 |
+| shallow_mlp | 0.743823 | 1.02649 | 24.2957 |
+| dnn | 0.768341 | 0.951669 | 23.8015 |
+
+Saved: /home/suhaank2/Scientific-Reports/results/unsw_nb15_decomposition.csv

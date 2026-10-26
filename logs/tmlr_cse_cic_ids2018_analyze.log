@@ -1,0 +1,58 @@
+/home/suhaank2/Scientific-Reports/venv/lib/python3.13/site-packages/torch/cuda/__init__.py:188: UserWarning: CUDA initialization: The NVIDIA driver on your system is too old (found version 12080). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver. (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Architectures present: ['xgboost', 'random_forest', 'shallow_mlp', 'dnn']
+Bootstrap iterations: 5000  RNG seed: 999999
+  xgboost              aggregate_accuracy   0.000000 (0.00)
+  xgboost              normal               0.000000 (0.00)
+  xgboost              bruteforce           0.000000 (0.00)
+  xgboost              dos                  0.000000 (0.00)
+  xgboost              web_attacks          0.000000 (0.00)
+  xgboost              infiltration         0.000000 (0.00)
+  xgboost              botnet               0.000000 (0.00)
+  xgboost              ddos                 Degen.
+  random_forest        aggregate_accuracy   0.000000 (0.00)
+  random_forest        normal               0.000000 (0.00)
+  random_forest        bruteforce           0.000000 (0.00)
+  random_forest        dos                  0.000000 (0.00)
+  random_forest        web_attacks          Degen.
+  random_forest        infiltration         0.000000 (0.00)
+  random_forest        botnet               0.000000 (0.00)
+  random_forest        ddos                 0.000000 (0.00)
+  shallow_mlp          aggregate_accuracy   0.000000 (0.00)
+  shallow_mlp          normal               0.000000 (0.00)
+  shallow_mlp          bruteforce           0.002581 (37.23)
+  shallow_mlp          dos                  0.000559 (8.75)
+  shallow_mlp          web_attacks          Degen.
+  shallow_mlp          infiltration         0.000004 (0.67)
+  shallow_mlp          botnet               0.000000 (0.00)
+  shallow_mlp          ddos                 0.000000 (0.00)
+  dnn                  aggregate_accuracy   0.000000 (0.00)
+  dnn                  normal               0.000000 (2.05)
+  dnn                  bruteforce           0.000290 (5.41)
+  dnn                  dos                  0.000021 (0.31)
+  dnn                  web_attacks          Degen.
+  dnn                  infiltration         0.000061 (10.26)
+  dnn                  botnet               0.000000 (0.00)
+  dnn                  ddos                 0.000001 (0.78)
+
+=== cse_cic_ids2018: genuine between-seed variance (SNR), layout of Table 7 ===
+| cell | xgboost | random_forest | shallow_mlp | dnn |
+|---|---|---|---|---|
+| aggregate_accuracy | 0.000000 (0.00) | 0.000000 (0.00) | 0.000000 (0.00) | 0.000000 (0.00) |
+| normal | 0.000000 (0.00) | 0.000000 (0.00) | 0.000000 (0.00) | 0.000000 (2.05) |
+| bruteforce | 0.000000 (0.00) | 0.000000 (0.00) | 0.002581 (37.23) | 0.000290 (5.41) |
+| dos | 0.000000 (0.00) | 0.000000 (0.00) | 0.000559 (8.75) | 0.000021 (0.31) |
+| web_attacks | 0.000000 (0.00) | Degen. | Degen. | Degen. |
+| infiltration | 0.000000 (0.00) | 0.000000 (0.00) | 0.000004 (0.67) | 0.000061 (10.26) |
+| botnet | 0.000000 (0.00) | 0.000000 (0.00) | 0.000000 (0.00) | 0.000000 (0.00) |
+| ddos | Degen. | 0.000000 (0.00) | 0.000000 (0.00) | 0.000001 (0.78) |
+
+=== aggregate accuracy: mean, CV %, SNR ===
+| architecture | mean | cv_pct | snr |
+|---|---|---|---|
+| xgboost | 0.984081 | 0.00643185 | 0 |
+| random_forest | 0.982715 | 0.006614 | 0 |
+| shallow_mlp | 0.982693 | 0.0343941 | 0 |
+| dnn | 0.982706 | 0.015775 | 0 |
+
+Saved: /home/suhaank2/Scientific-Reports/results/cse_cic_ids2018_decomposition.csv

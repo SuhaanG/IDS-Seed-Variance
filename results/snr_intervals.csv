@@ -1,0 +1,193 @@
+table,dataset,architecture,cell,n_seeds,snr_closed_form,lo90,hi90,excludes_1
+NSL-KDD,nsl_kdd,dnn,aggregate_accuracy,40,10.173289674863366,6.21237572605929,13.99927804632046,True
+NSL-KDD,nsl_kdd,dnn,normal,40,71.09586373902275,56.11684444958564,77.85336418137892,True
+NSL-KDD,nsl_kdd,dnn,dos,40,8.69219761128371,1.5836390985772755,16.078820417175884,True
+NSL-KDD,nsl_kdd,dnn,probe,40,12.162782642717957,8.16755123316482,15.71937299456486,True
+NSL-KDD,nsl_kdd,dnn,r2l,40,4.806418969397578,1.8065211468852984,8.009670618446084,True
+NSL-KDD,nsl_kdd,dnn,u2r,40,1.69651174545876,0.3219915817040223,3.289399023873336,False
+NSL-KDD,nsl_kdd,random_forest,aggregate_accuracy,40,2.8916605702924385,1.2871228923294349,4.413421342734275,True
+NSL-KDD,nsl_kdd,random_forest,normal,40,0.0,0.0,0.0,False
+NSL-KDD,nsl_kdd,random_forest,dos,40,11.791762001405873,6.641846263494267,16.805106696140115,True
+NSL-KDD,nsl_kdd,random_forest,probe,40,0.0,0.0,0.0,False
+NSL-KDD,nsl_kdd,random_forest,r2l,40,9.949974842595836,6.568590469630932,13.171705987065375,True
+NSL-KDD,nsl_kdd,random_forest,u2r,40,0.0,0.0,0.0,False
+NSL-KDD,nsl_kdd,shallow_mlp,aggregate_accuracy,40,4.187073092292833,1.7222588955681117,7.148366101964755,True
+NSL-KDD,nsl_kdd,shallow_mlp,normal,40,19.76479061280173,7.687415923655201,32.427789487153746,True
+NSL-KDD,nsl_kdd,shallow_mlp,dos,40,3.2511800308715952,1.8846757486558254,4.506201095038809,True
+NSL-KDD,nsl_kdd,shallow_mlp,probe,40,16.619592805992923,12.328534035746955,20.12807223668419,True
+NSL-KDD,nsl_kdd,shallow_mlp,r2l,40,6.680237620183425,2.6420996796555163,11.14927301801245,True
+NSL-KDD,nsl_kdd,shallow_mlp,u2r,40,0.0,0.0,0.1560280861003846,False
+NSL-KDD,nsl_kdd,xgboost,aggregate_accuracy,40,0.0,0.0,0.3151891088765527,False
+NSL-KDD,nsl_kdd,xgboost,normal,40,0.0,0.0,0.0,False
+NSL-KDD,nsl_kdd,xgboost,dos,40,0.3697659903287679,0.0,1.0738719379649477,False
+NSL-KDD,nsl_kdd,xgboost,probe,40,1.4737115542145764,0.6742733661498901,2.2366505068471505,False
+NSL-KDD,nsl_kdd,xgboost,r2l,40,7.221408567434067,5.122250499459456,9.01660991390429,True
+NSL-KDD,nsl_kdd,xgboost,u2r,40,0.0,0.0,0.0,False
+NSL-KDD,nsl_kdd,lightgbm_deterministic,aggregate_accuracy,40,1429.7645472442025,532.3587945860966,2435.13038385399,True
+NSL-KDD,nsl_kdd,lightgbm_deterministic,normal,40,4734.301543745615,773.152223469733,9923.174057402304,True
+NSL-KDD,nsl_kdd,lightgbm_deterministic,dos,40,1726.26093289773,687.4323802911204,2778.594144327138,True
+NSL-KDD,nsl_kdd,lightgbm_deterministic,probe,40,539.2313104245093,319.04101693895007,768.891815220725,True
+NSL-KDD,nsl_kdd,lightgbm_deterministic,r2l,40,141.18752702263566,98.44311469567957,178.40334101360895,True
+NSL-KDD,nsl_kdd,lightgbm_deterministic,u2r,40,39.45102006540171,10.438362283047647,63.32903532218309,True
+CSE-CIC-IDS2018,cse_cic_ids2018,dnn,aggregate_accuracy,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,dnn,normal,40,2.055001324219417,0.16639514822384166,3.9093809920020073,False
+CSE-CIC-IDS2018,cse_cic_ids2018,dnn,bruteforce,40,5.400660337288766,1.8994569772260435,8.179515858144724,True
+CSE-CIC-IDS2018,cse_cic_ids2018,dnn,dos,40,0.3002948155415654,0.0,0.9217536264605137,False
+CSE-CIC-IDS2018,cse_cic_ids2018,dnn,web_attacks,40,,,,False
+CSE-CIC-IDS2018,cse_cic_ids2018,dnn,infiltration,40,10.51397727709572,0.9643674009871092,15.206257055313648,False
+CSE-CIC-IDS2018,cse_cic_ids2018,dnn,botnet,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,dnn,ddos,40,0.7777479616843567,0.3219946514844322,1.193338115633283,False
+CSE-CIC-IDS2018,cse_cic_ids2018,random_forest,aggregate_accuracy,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,random_forest,normal,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,random_forest,bruteforce,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,random_forest,dos,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,random_forest,web_attacks,40,,,,False
+CSE-CIC-IDS2018,cse_cic_ids2018,random_forest,infiltration,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,random_forest,botnet,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,random_forest,ddos,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,shallow_mlp,aggregate_accuracy,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,shallow_mlp,normal,40,0.0,0.0,0.007644552540706627,False
+CSE-CIC-IDS2018,cse_cic_ids2018,shallow_mlp,bruteforce,40,37.35543611288086,3.535973544020752,65.18186217704334,True
+CSE-CIC-IDS2018,cse_cic_ids2018,shallow_mlp,dos,40,8.711616218607,0.39940412299599626,18.516620573767653,False
+CSE-CIC-IDS2018,cse_cic_ids2018,shallow_mlp,web_attacks,40,,,,False
+CSE-CIC-IDS2018,cse_cic_ids2018,shallow_mlp,infiltration,40,0.6816117021094971,0.3565480550256437,1.0059944872952877,False
+CSE-CIC-IDS2018,cse_cic_ids2018,shallow_mlp,botnet,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,shallow_mlp,ddos,40,0.0,0.0,0.11726066801713037,False
+CSE-CIC-IDS2018,cse_cic_ids2018,xgboost,aggregate_accuracy,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,xgboost,normal,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,xgboost,bruteforce,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,xgboost,dos,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,xgboost,web_attacks,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,xgboost,infiltration,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,xgboost,botnet,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,xgboost,ddos,40,,,,False
+CSE-CIC-IDS2018,cse_cic_ids2018,lightgbm_deterministic,aggregate_accuracy,40,4046.9392853837962,1695.9971137918467,6934.844572795726,True
+CSE-CIC-IDS2018,cse_cic_ids2018,lightgbm_deterministic,normal,40,7583.818394862343,2588.3448810027903,13420.697813710778,True
+CSE-CIC-IDS2018,cse_cic_ids2018,lightgbm_deterministic,bruteforce,40,883.633915874698,556.8019781863946,1328.687352859321,True
+CSE-CIC-IDS2018,cse_cic_ids2018,lightgbm_deterministic,dos,40,1190.7709135949563,807.56026141452,1642.912036154527,True
+CSE-CIC-IDS2018,cse_cic_ids2018,lightgbm_deterministic,web_attacks,40,0.8461538461538465,0.6923076923076921,0.9999999999999998,False
+CSE-CIC-IDS2018,cse_cic_ids2018,lightgbm_deterministic,infiltration,40,26.98430488758502,20.173310233954044,32.82454289136645,True
+CSE-CIC-IDS2018,cse_cic_ids2018,lightgbm_deterministic,botnet,40,997.307226724128,629.3747657096,1517.540475757729,True
+CSE-CIC-IDS2018,cse_cic_ids2018,lightgbm_deterministic,ddos,40,2184.8174551254497,1436.0527876150604,3074.982224851755,True
+CSE-CIC-IDS2018,cse_cic_ids2018,logistic_regression,aggregate_accuracy,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,logistic_regression,normal,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,logistic_regression,bruteforce,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,logistic_regression,dos,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,logistic_regression,web_attacks,40,,,,False
+CSE-CIC-IDS2018,cse_cic_ids2018,logistic_regression,infiltration,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,logistic_regression,botnet,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018,cse_cic_ids2018,logistic_regression,ddos,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,dnn,aggregate_accuracy,40,23.73850497204791,14.41886244223297,32.6258984028874,True
+UNSW-NB15,unsw_nb15,dnn,normal,40,93.72778204900979,60.021326436752325,125.47474650759607,True
+UNSW-NB15,unsw_nb15,dnn,generic,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,dnn,exploits,40,11.9231897791968,8.002695395026558,15.518439067031977,True
+UNSW-NB15,unsw_nb15,dnn,fuzzers,40,48.36434070579389,32.61993817941575,62.96304307921338,True
+UNSW-NB15,unsw_nb15,dnn,dos,40,16.15649226302672,9.304844322330052,23.3704994501976,True
+UNSW-NB15,unsw_nb15,dnn,reconnaissance,40,7.87737256776175,3.5570903334950152,12.28318736437239,True
+UNSW-NB15,unsw_nb15,dnn,analysis,40,,,,False
+UNSW-NB15,unsw_nb15,dnn,backdoor,40,1.3606302289693175,0.4189125014840246,1.9967782805429977,False
+UNSW-NB15,unsw_nb15,dnn,shellcode,40,2.9480602788951655,1.6563520083229468,4.178278265142746,True
+UNSW-NB15,unsw_nb15,dnn,worms,40,2.6598819279231645,1.9095236305788332,3.3723998022100448,True
+UNSW-NB15,unsw_nb15,random_forest,aggregate_accuracy,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,random_forest,normal,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,random_forest,generic,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,random_forest,exploits,40,0.2723346145481107,0.0,0.5882400178657089,False
+UNSW-NB15,unsw_nb15,random_forest,fuzzers,40,1.3299091748126524,0.5097125990579676,2.112326392440473,False
+UNSW-NB15,unsw_nb15,random_forest,dos,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,random_forest,reconnaissance,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,random_forest,analysis,40,1.227210936534528,0.559678226542423,1.87493303191025,False
+UNSW-NB15,unsw_nb15,random_forest,backdoor,40,0.0,0.0,0.14463588984445147,False
+UNSW-NB15,unsw_nb15,random_forest,shellcode,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,random_forest,worms,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,shallow_mlp,aggregate_accuracy,40,24.196435371830958,16.606354590342992,31.286729837910677,True
+UNSW-NB15,unsw_nb15,shallow_mlp,normal,40,61.23557059791524,41.30745227390593,79.80787260125408,True
+UNSW-NB15,unsw_nb15,shallow_mlp,generic,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,shallow_mlp,exploits,40,33.14734712088144,4.4399814399414055,77.46923953829676,True
+UNSW-NB15,unsw_nb15,shallow_mlp,fuzzers,40,52.048983740453735,33.214356949215706,70.51821017513352,True
+UNSW-NB15,unsw_nb15,shallow_mlp,dos,40,126.79225506361665,6.332103351772172,288.89035286096674,True
+UNSW-NB15,unsw_nb15,shallow_mlp,reconnaissance,40,3.450899826993042,1.0437963586982044,6.598972911853147,True
+UNSW-NB15,unsw_nb15,shallow_mlp,analysis,40,1.6262464915683257,0.8001899335232232,2.454265761958045,False
+UNSW-NB15,unsw_nb15,shallow_mlp,backdoor,40,0.311307803704958,0.01625056230321178,0.5922069507317037,False
+UNSW-NB15,unsw_nb15,shallow_mlp,shellcode,40,4.881565640914788,2.935119313350553,6.727673800307347,True
+UNSW-NB15,unsw_nb15,shallow_mlp,worms,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,xgboost,aggregate_accuracy,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,xgboost,normal,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,xgboost,generic,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,xgboost,exploits,40,1.2138781312640707,0.0,2.5411770713598507,False
+UNSW-NB15,unsw_nb15,xgboost,fuzzers,40,0.6904911439824954,0.0,1.4618354633184718,False
+UNSW-NB15,unsw_nb15,xgboost,dos,40,1.231964055774309,0.09416822745456016,2.4375318983738135,False
+UNSW-NB15,unsw_nb15,xgboost,reconnaissance,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,xgboost,analysis,40,8.79073616967213,5.791490973844369,11.848676844299534,True
+UNSW-NB15,unsw_nb15,xgboost,backdoor,40,4.843087617542783,3.280978207713815,6.221785593238504,True
+UNSW-NB15,unsw_nb15,xgboost,shellcode,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,xgboost,worms,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,lightgbm_deterministic,aggregate_accuracy,40,531.2558138092056,266.3229647670668,798.2874800574956,True
+UNSW-NB15,unsw_nb15,lightgbm_deterministic,normal,40,262.67576859534336,45.98912073978885,490.13706029723517,True
+UNSW-NB15,unsw_nb15,lightgbm_deterministic,generic,40,1052.1545573871394,759.4668334561425,1293.5818451439206,True
+UNSW-NB15,unsw_nb15,lightgbm_deterministic,exploits,40,210.38081978769245,66.61889626031083,359.7176836347336,True
+UNSW-NB15,unsw_nb15,lightgbm_deterministic,fuzzers,40,62.160198961475416,30.13647568247839,96.87339552603163,True
+UNSW-NB15,unsw_nb15,lightgbm_deterministic,dos,40,91.52852301165284,59.790482394484684,117.06672721714668,True
+UNSW-NB15,unsw_nb15,lightgbm_deterministic,reconnaissance,40,146.99036424733248,13.143300499139588,285.4564568796328,True
+UNSW-NB15,unsw_nb15,lightgbm_deterministic,analysis,40,20.307458235024875,13.775584734538532,26.640840495183134,True
+UNSW-NB15,unsw_nb15,lightgbm_deterministic,backdoor,40,26.355194842064066,5.4514979361351905,46.54671345094039,True
+UNSW-NB15,unsw_nb15,lightgbm_deterministic,shellcode,40,21.694183864915576,7.385969546406989,36.90223213569096,True
+UNSW-NB15,unsw_nb15,lightgbm_deterministic,worms,40,6.217234742658472,4.210930524703141,8.275190019348969,True
+UNSW-NB15,unsw_nb15,logistic_regression,aggregate_accuracy,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,logistic_regression,normal,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,logistic_regression,generic,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,logistic_regression,exploits,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,logistic_regression,fuzzers,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,logistic_regression,dos,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,logistic_regression,reconnaissance,40,0.0,0.0,0.0,False
+UNSW-NB15,unsw_nb15,logistic_regression,analysis,40,,,,False
+UNSW-NB15,unsw_nb15,logistic_regression,backdoor,40,,,,False
+UNSW-NB15,unsw_nb15,logistic_regression,shellcode,40,,,,False
+UNSW-NB15,unsw_nb15,logistic_regression,worms,40,,,,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,dnn,aggregate_accuracy,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,dnn,normal,40,1.2461498049981898,0.6493639727377726,1.7658153278068403,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,dnn,bruteforce,40,1.62675088632118,0.0,4.019325947305964,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,dnn,dos,40,0.0,0.0,0.3939076132180123,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,dnn,web_attacks,40,,,,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,dnn,infiltration,40,1.0474777768771326,0.693941416889889,1.4042444295466343,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,dnn,botnet,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,dnn,ddos,40,1.8781364999697736,0.7079151621365417,2.856475428234508,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,logistic_regression,aggregate_accuracy,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,logistic_regression,normal,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,logistic_regression,bruteforce,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,logistic_regression,dos,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,logistic_regression,web_attacks,40,,,,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,logistic_regression,infiltration,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,logistic_regression,botnet,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,logistic_regression,ddos,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,random_forest,aggregate_accuracy,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,random_forest,normal,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,random_forest,bruteforce,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,random_forest,dos,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,random_forest,web_attacks,40,,,,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,random_forest,infiltration,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,random_forest,botnet,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,random_forest,ddos,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,shallow_mlp,aggregate_accuracy,40,0.0,0.0,0.4688535698719968,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,shallow_mlp,normal,40,0.0,0.0,0.2798207299246373,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,shallow_mlp,bruteforce,40,62.21392214174054,25.5184420573177,94.67620955005967,True
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,shallow_mlp,dos,40,10.21135781517559,3.4002205190464707,19.34149742886186,True
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,shallow_mlp,web_attacks,40,,,,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,shallow_mlp,infiltration,40,0.6135418312009575,0.2380761365423852,0.9903685867753141,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,shallow_mlp,botnet,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,shallow_mlp,ddos,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,xgboost,aggregate_accuracy,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,xgboost,normal,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,xgboost,bruteforce,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,xgboost,dos,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,xgboost,web_attacks,40,,,,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,xgboost,infiltration,40,0.0,0.0,0.0,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,xgboost,botnet,40,,,,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,xgboost,ddos,40,,,,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,lightgbm_deterministic,aggregate_accuracy,40,3206.46130876129,1985.9280938558882,4309.981214291118,True
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,lightgbm_deterministic,normal,40,6150.114497852709,3456.192734349032,8430.853808769712,True
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,lightgbm_deterministic,bruteforce,40,1006.2607509217881,670.1283215726132,1445.9277541770139,True
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,lightgbm_deterministic,dos,40,1382.542090200768,977.5935722352315,1839.7893520547805,True
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,lightgbm_deterministic,web_attacks,40,inf,,,False
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,lightgbm_deterministic,infiltration,40,17.87051393897441,11.03366620330397,23.73954734915211,True
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,lightgbm_deterministic,botnet,40,1318.2797842724553,741.1891381009558,2267.316744075931,True
+CSE-CIC-IDS2018 draw 2,cse_cic_ids2018_draw2,lightgbm_deterministic,ddos,40,2138.9282722362573,1395.3734088307983,3037.3636887731914,True

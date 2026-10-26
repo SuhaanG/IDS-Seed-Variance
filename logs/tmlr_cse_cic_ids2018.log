@@ -1,0 +1,145 @@
+/home/suhaank2/Scientific-Reports/venv/lib/python3.13/site-packages/torch/cuda/__init__.py:188: UserWarning: CUDA initialization: The NVIDIA driver on your system is too old (found version 12080). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver. (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Loading cse_cic_ids2018 ...
+Train/test overlap audit: 4786 of 39999 test rows (11.97%) have feature values identical to some training row (hash-based check, not a guarantee against hash collisions, but a strong signal).
+X_train (200000, 78)  X_test (39999, 78)  7 classes
+
+--- random_forest: 0 done, 40 to run ---
+[cse_cic_ids2018 | random_forest | seed 0] done in 9.8s, epochs_run=None, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | random_forest | seed 1] done in 9.6s, epochs_run=None, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | random_forest | seed 2] done in 9.4s, epochs_run=None, aggregate_accuracy=0.9826
+[cse_cic_ids2018 | random_forest | seed 3] done in 9.1s, epochs_run=None, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | random_forest | seed 4] done in 9.0s, epochs_run=None, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | random_forest | seed 5] done in 8.9s, epochs_run=None, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | random_forest | seed 6] done in 8.9s, epochs_run=None, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | random_forest | seed 7] done in 9.0s, epochs_run=None, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | random_forest | seed 8] done in 9.1s, epochs_run=None, aggregate_accuracy=0.9826
+[cse_cic_ids2018 | random_forest | seed 9] done in 9.2s, epochs_run=None, aggregate_accuracy=0.9827
+    [random_forest] 10 seeds so far: mean=0.9827 std=0.00005 min=0.9826 max=0.9828
+[cse_cic_ids2018 | random_forest | seed 10] done in 9.2s, epochs_run=None, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | random_forest | seed 11] done in 9.0s, epochs_run=None, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | random_forest | seed 12] done in 9.2s, epochs_run=None, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | random_forest | seed 13] done in 9.2s, epochs_run=None, aggregate_accuracy=0.9826
+[cse_cic_ids2018 | random_forest | seed 14] done in 9.4s, epochs_run=None, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | random_forest | seed 15] done in 9.1s, epochs_run=None, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | random_forest | seed 16] done in 9.0s, epochs_run=None, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | random_forest | seed 17] done in 9.1s, epochs_run=None, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | random_forest | seed 18] done in 8.9s, epochs_run=None, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | random_forest | seed 19] done in 9.0s, epochs_run=None, aggregate_accuracy=0.9827
+    [random_forest] 20 seeds so far: mean=0.9827 std=0.00006 min=0.9826 max=0.9828
+[cse_cic_ids2018 | random_forest | seed 20] done in 8.2s, epochs_run=None, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | random_forest | seed 21] done in 5.1s, epochs_run=None, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | random_forest | seed 22] done in 7.2s, epochs_run=None, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | random_forest | seed 23] done in 7.3s, epochs_run=None, aggregate_accuracy=0.9826
+[cse_cic_ids2018 | random_forest | seed 24] done in 7.5s, epochs_run=None, aggregate_accuracy=0.9826
+[cse_cic_ids2018 | random_forest | seed 25] done in 7.3s, epochs_run=None, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | random_forest | seed 26] done in 7.3s, epochs_run=None, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | random_forest | seed 27] done in 7.3s, epochs_run=None, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | random_forest | seed 28] done in 7.3s, epochs_run=None, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | random_forest | seed 29] done in 7.1s, epochs_run=None, aggregate_accuracy=0.9828
+    [random_forest] 30 seeds so far: mean=0.9827 std=0.00007 min=0.9826 max=0.9828
+[cse_cic_ids2018 | random_forest | seed 30] done in 7.3s, epochs_run=None, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | random_forest | seed 31] done in 7.2s, epochs_run=None, aggregate_accuracy=0.9826
+[cse_cic_ids2018 | random_forest | seed 32] done in 7.3s, epochs_run=None, aggregate_accuracy=0.9826
+[cse_cic_ids2018 | random_forest | seed 33] done in 7.3s, epochs_run=None, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | random_forest | seed 34] done in 7.3s, epochs_run=None, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | random_forest | seed 35] done in 7.4s, epochs_run=None, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | random_forest | seed 36] done in 7.3s, epochs_run=None, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | random_forest | seed 37] done in 7.2s, epochs_run=None, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | random_forest | seed 38] done in 7.3s, epochs_run=None, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | random_forest | seed 39] done in 7.3s, epochs_run=None, aggregate_accuracy=0.9828
+    [random_forest] 40 seeds so far: mean=0.9827 std=0.00006 min=0.9826 max=0.9828
+
+--- shallow_mlp: 0 done, 40 to run ---
+[cse_cic_ids2018 | shallow_mlp | seed 0] done in 23.8s, epochs_run=29, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | shallow_mlp | seed 1] done in 21.6s, epochs_run=27, aggregate_accuracy=0.9814
+[cse_cic_ids2018 | shallow_mlp | seed 2] done in 35.3s, epochs_run=45, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | shallow_mlp | seed 3] done in 28.9s, epochs_run=37, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | shallow_mlp | seed 4] done in 21.9s, epochs_run=28, aggregate_accuracy=0.9824
+[cse_cic_ids2018 | shallow_mlp | seed 5] done in 33.3s, epochs_run=43, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | shallow_mlp | seed 6] done in 28.2s, epochs_run=36, aggregate_accuracy=0.9826
+[cse_cic_ids2018 | shallow_mlp | seed 7] done in 19.7s, epochs_run=25, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | shallow_mlp | seed 8] done in 21.3s, epochs_run=27, aggregate_accuracy=0.9824
+[cse_cic_ids2018 | shallow_mlp | seed 9] done in 22.8s, epochs_run=29, aggregate_accuracy=0.9827
+    [shallow_mlp] 10 seeds so far: mean=0.9825 std=0.00042 min=0.9814 max=0.9828
+[cse_cic_ids2018 | shallow_mlp | seed 10] done in 31.4s, epochs_run=40, aggregate_accuracy=0.9825
+[cse_cic_ids2018 | shallow_mlp | seed 11] done in 31.4s, epochs_run=40, aggregate_accuracy=0.9832
+[cse_cic_ids2018 | shallow_mlp | seed 12] done in 26.9s, epochs_run=34, aggregate_accuracy=0.9830
+[cse_cic_ids2018 | shallow_mlp | seed 13] done in 19.0s, epochs_run=24, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | shallow_mlp | seed 14] done in 21.5s, epochs_run=27, aggregate_accuracy=0.9825
+[cse_cic_ids2018 | shallow_mlp | seed 15] done in 18.2s, epochs_run=23, aggregate_accuracy=0.9826
+[cse_cic_ids2018 | shallow_mlp | seed 16] done in 26.1s, epochs_run=33, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | shallow_mlp | seed 17] done in 35.1s, epochs_run=44, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | shallow_mlp | seed 18] done in 21.3s, epochs_run=27, aggregate_accuracy=0.9825
+[cse_cic_ids2018 | shallow_mlp | seed 19] done in 24.5s, epochs_run=31, aggregate_accuracy=0.9826
+    [shallow_mlp] 20 seeds so far: mean=0.9826 std=0.00034 min=0.9814 max=0.9832
+[cse_cic_ids2018 | shallow_mlp | seed 20] done in 27.6s, epochs_run=35, aggregate_accuracy=0.9831
+[cse_cic_ids2018 | shallow_mlp | seed 21] done in 19.4s, epochs_run=25, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | shallow_mlp | seed 22] done in 24.9s, epochs_run=32, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | shallow_mlp | seed 23] done in 33.3s, epochs_run=43, aggregate_accuracy=0.9833
+[cse_cic_ids2018 | shallow_mlp | seed 24] done in 19.5s, epochs_run=25, aggregate_accuracy=0.9826
+[cse_cic_ids2018 | shallow_mlp | seed 25] done in 35.2s, epochs_run=45, aggregate_accuracy=0.9832
+[cse_cic_ids2018 | shallow_mlp | seed 26] done in 21.7s, epochs_run=28, aggregate_accuracy=0.9824
+[cse_cic_ids2018 | shallow_mlp | seed 27] done in 22.4s, epochs_run=29, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | shallow_mlp | seed 28] done in 37.9s, epochs_run=49, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | shallow_mlp | seed 29] done in 27.9s, epochs_run=36, aggregate_accuracy=0.9832
+    [shallow_mlp] 30 seeds so far: mean=0.9827 std=0.00035 min=0.9814 max=0.9833
+[cse_cic_ids2018 | shallow_mlp | seed 30] done in 28.6s, epochs_run=37, aggregate_accuracy=0.9819
+[cse_cic_ids2018 | shallow_mlp | seed 31] done in 23.9s, epochs_run=31, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | shallow_mlp | seed 32] done in 17.6s, epochs_run=23, aggregate_accuracy=0.9831
+[cse_cic_ids2018 | shallow_mlp | seed 33] done in 23.6s, epochs_run=31, aggregate_accuracy=0.9829
+[cse_cic_ids2018 | shallow_mlp | seed 34] done in 29.9s, epochs_run=39, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | shallow_mlp | seed 35] done in 29.8s, epochs_run=39, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | shallow_mlp | seed 36] done in 24.4s, epochs_run=32, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | shallow_mlp | seed 37] done in 25.2s, epochs_run=33, aggregate_accuracy=0.9824
+[cse_cic_ids2018 | shallow_mlp | seed 38] done in 22.3s, epochs_run=29, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | shallow_mlp | seed 39] done in 18.2s, epochs_run=24, aggregate_accuracy=0.9824
+    [shallow_mlp] 40 seeds so far: mean=0.9827 std=0.00034 min=0.9814 max=0.9833
+
+--- dnn: 0 done, 40 to run ---
+[cse_cic_ids2018 | dnn | seed 0] done in 35.6s, epochs_run=24, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | dnn | seed 1] done in 32.8s, epochs_run=22, aggregate_accuracy=0.9826
+[cse_cic_ids2018 | dnn | seed 2] done in 36.8s, epochs_run=25, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | dnn | seed 3] done in 37.9s, epochs_run=26, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | dnn | seed 4] done in 52.4s, epochs_run=36, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | dnn | seed 5] done in 37.7s, epochs_run=26, aggregate_accuracy=0.9825
+[cse_cic_ids2018 | dnn | seed 6] done in 33.4s, epochs_run=23, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | dnn | seed 7] done in 42.2s, epochs_run=29, aggregate_accuracy=0.9829
+[cse_cic_ids2018 | dnn | seed 8] done in 34.2s, epochs_run=23, aggregate_accuracy=0.9826
+[cse_cic_ids2018 | dnn | seed 9] done in 52.0s, epochs_run=33, aggregate_accuracy=0.9826
+    [dnn] 10 seeds so far: mean=0.9827 std=0.00011 min=0.9825 max=0.9829
+[cse_cic_ids2018 | dnn | seed 10] done in 26.3s, epochs_run=15, aggregate_accuracy=0.9826
+[cse_cic_ids2018 | dnn | seed 11] done in 35.4s, epochs_run=20, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | dnn | seed 12] done in 42.6s, epochs_run=24, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | dnn | seed 13] done in 54.0s, epochs_run=30, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | dnn | seed 14] done in 34.1s, epochs_run=19, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | dnn | seed 15] done in 27.1s, epochs_run=15, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | dnn | seed 16] done in 55.0s, epochs_run=30, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | dnn | seed 17] done in 38.1s, epochs_run=21, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | dnn | seed 18] done in 37.0s, epochs_run=20, aggregate_accuracy=0.9826
+[cse_cic_ids2018 | dnn | seed 19] done in 30.9s, epochs_run=17, aggregate_accuracy=0.9826
+    [dnn] 20 seeds so far: mean=0.9827 std=0.00009 min=0.9825 max=0.9829
+[cse_cic_ids2018 | dnn | seed 20] done in 51.4s, epochs_run=28, aggregate_accuracy=0.9824
+[cse_cic_ids2018 | dnn | seed 21] done in 42.3s, epochs_run=23, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | dnn | seed 22] done in 40.3s, epochs_run=22, aggregate_accuracy=0.9826
+[cse_cic_ids2018 | dnn | seed 23] done in 33.0s, epochs_run=18, aggregate_accuracy=0.9829
+[cse_cic_ids2018 | dnn | seed 24] done in 46.2s, epochs_run=25, aggregate_accuracy=0.9829
+[cse_cic_ids2018 | dnn | seed 25] done in 28.7s, epochs_run=16, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | dnn | seed 26] done in 37.7s, epochs_run=21, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | dnn | seed 27] done in 23.1s, epochs_run=13, aggregate_accuracy=0.9823
+[cse_cic_ids2018 | dnn | seed 28] done in 35.3s, epochs_run=20, aggregate_accuracy=0.9826
+[cse_cic_ids2018 | dnn | seed 29] done in 34.3s, epochs_run=19, aggregate_accuracy=0.9824
+    [dnn] 30 seeds so far: mean=0.9827 std=0.00014 min=0.9823 max=0.9829
+[cse_cic_ids2018 | dnn | seed 30] done in 31.6s, epochs_run=18, aggregate_accuracy=0.9825
+[cse_cic_ids2018 | dnn | seed 31] done in 36.4s, epochs_run=20, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | dnn | seed 32] done in 47.8s, epochs_run=27, aggregate_accuracy=0.9829
+[cse_cic_ids2018 | dnn | seed 33] done in 29.8s, epochs_run=17, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | dnn | seed 34] done in 42.1s, epochs_run=24, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | dnn | seed 35] done in 38.6s, epochs_run=22, aggregate_accuracy=0.9832
+[cse_cic_ids2018 | dnn | seed 36] done in 29.9s, epochs_run=17, aggregate_accuracy=0.9825
+[cse_cic_ids2018 | dnn | seed 37] done in 71.4s, epochs_run=41, aggregate_accuracy=0.9828
+[cse_cic_ids2018 | dnn | seed 38] done in 45.4s, epochs_run=25, aggregate_accuracy=0.9827
+[cse_cic_ids2018 | dnn | seed 39] done in 32.3s, epochs_run=18, aggregate_accuracy=0.9827
+    [dnn] 40 seeds so far: mean=0.9827 std=0.00016 min=0.9823 max=0.9832
+
+Run complete. Now: --analyze
