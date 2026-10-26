@@ -21,9 +21,10 @@ Read from the result files, so the figure always matches the tables:
     estimator, 5,000 bootstrap iterations).
   CSE-CIC-IDS2018 and UNSW-NB15: LightGBM from results/<ds>_corrected_decomposition_lgbdet.csv
     (deterministic, run set C); logistic regression from the same decomposition file
-    (clean re-runs; SNR 0 on both); DNN, random forest, XGBoost
-    and shallow MLP from Tables 7 and 8 (original run set A, whose per-seed
-    files were not retained), transcribed below.
+    (clean re-runs; SNR 0 on both); DNN, random forest, XGBoost and shallow MLP
+    from results/<ds>_decomposition.csv (October cluster runs: XGBoost from the
+    round-3 re-run, DNN, random forest and shallow MLP from the TMLR re-runs that
+    replaced the original run set A, whose environment was not recorded).
 
 Usage:
     python figures/build_figure1.py
@@ -41,8 +42,6 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ARCHS = ["DNN", "Random\nForest", "XGBoost", "LightGBM", "Logistic\nRegression", "Shallow\nMLP"]
 COLORS = ["#1f5fa8", "#74add1", "#2e7d32", "#b2182b", "#e8735a", "#7b2c8f"]
 
-# Run set A values (Tables 7 and 8), order DNN, RF, XGBoost, shallow MLP.
-SET_A = {"CSE-CIC-IDS2018": [0.00, 0.00, 0.00, 0.00], "UNSW-NB15": [29.53, 0.00, 0.00, 17.45]}
 RES = os.path.join(HERE, "..", "results")
 import pandas as pd
 
@@ -60,10 +59,11 @@ def load_snr():
     out = {"NSL-KDD": [agg_snr(nsl, a) for a in
                        ("dnn", "random_forest", "xgboost", "lightgbm_deterministic", "logistic_regression", "shallow_mlp")]}
     for ds, key in (("CSE-CIC-IDS2018", "cse_cic_ids2018"), ("UNSW-NB15", "unsw_nb15")):
-        dnn, rf, xgb, mlp = SET_A[ds]
+        dec = f"{key}_decomposition.csv"
+        dnn, rf, mlp = (agg_snr(dec, a) for a in ("dnn", "random_forest", "shallow_mlp"))
         lgb = agg_snr(f"{key}_corrected_decomposition_lgbdet.csv", "lightgbm_deterministic")
         lr = agg_snr(f"{key}_corrected_decomposition_lgbdet.csv", "logistic_regression")
-        xgb = agg_snr(f"{key}_decomposition.csv", "xgboost")  # run set C XGBoost
+        xgb = agg_snr(dec, "xgboost")
         out[ds] = [dnn, rf, xgb, lgb, lr, mlp]
     return out
 
